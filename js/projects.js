@@ -6,7 +6,7 @@ const PROJECTS_DATA = {
       description: 'Personal template for the CORELLE brand, category: nail products. It is a fully responsive website, optimized for both mobile and desktop. It includes systems such as Register, Login, Reviews, Favourites, History, and an Order System.',
       features: ['Advanced User Registration System', 'Interactive Review & Rating System', 'Real-time Chat Functionality', 'Payment Integration System', 'Advanced Analytics Dashboard'],
       images: [
-        'https://andzcr.github.io/resources/projects/corelle/home_land.mp4',
+        'https://andzcr.github.io/resources/videos/home_land.mp4',
         'https://res.cloudinary.com/df9syoltz/video/upload/v1764524717/1130_1_2_ptidlk.mp4',
         'https://andzcr.github.io/resources/projects/corelle/poza3.png',
         'https://andzcr.github.io/resources/projects/corelle/poza4.png',
@@ -18,7 +18,7 @@ const PROJECTS_DATA = {
         'https://andzcr.github.io/resources/projects/corelle/poza10.png',
         'https://andzcr.github.io/resources/projects/corelle/poza11.png'
       ],
-      thumbnail: 'https://andzcr.github.io/resources/projects/corelle/home_land.mp4',
+      thumbnail: 'https://andzcr.github.io/resources/videos/home_land.mp4',
       isVideoThumbnail: true
     },
     {
