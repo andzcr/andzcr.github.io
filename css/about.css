@@ -55,7 +55,7 @@
 .ios-description p {
   font-size: 0.95rem;
   line-height: 1.7;
-  color: var(--text-muted);
+  color: var(--primary-font);
   max-width: 600px;
   margin-bottom: 40px;
   font-weight: 400;

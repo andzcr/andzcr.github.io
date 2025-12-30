@@ -35,136 +35,105 @@
 }
 @font-face {
     font-family: 'TitleFont';
-    src: url('https://andzcr.github.io/resources/fonts/forth.otf') format('opentype');
+    src: url('https://andzcr.github.io/resources/fonts/Maves.ttf') format('truetype');
     font-display: swap;
 }
 body { background: var(--dark-bg); font-family: 'Sora', sans-serif; overflow-x: hidden; background-color: black; }
 
 /* =========================================
-   STICKY NAV (Detached & Glass)
+   CINEMATIC NAV SYSTEM (NEW)
    ========================================= */
-.sticky-nav {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-200%); /* Ascuns initial deasupra ecranului */
-    
-    width: 90%;
-    max-width: 500px;
-    height: 60px;
-    border-radius: 50px;
-    z-index: 9995; /* Sub burger-ul principal, dar peste content */
-    
-    /* Glass Effect */
-    background: var(--primary-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0px 100px rgba(255, 255, 255, 0.182);
-    
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 25px;
-    
-    transition: transform 0.6s var(--easing);
-}
-
-/* Cand devine vizibil (Scroll UP) */
-.sticky-nav.nav-visible {
-    transform: translateX(-50%) translateY(0);
-}
-.sticky-logo {
-    font-size: 1.8rem;
-    background: var(--premium-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-decoration: none;
-    font-weight: 100;
-    line-height: 1;
+.cinematic-nav {
     position: absolute;
-    top: 11px; left: 13px;
-    transition: color 0.3s;
-}
-.sticky-logo:hover {
-    animation: glow-white 2s infinite;
+    top: 40px;
+    left: 16%;
+    z-index: 10001;
+    display: block;
 }
 
-.sticky-burger {
-    cursor: pointer;
+.nav-list-cine {
+    list-style: none;
+    display: flex;
+    gap: 10px; /* Spatiu generos */
+    padding: 0;
+    margin: 0;
+}
+
+.cine-link {
+    text-decoration: none;
+    color: #000000; /* Alb pentru contrast pe negru */
+    font-family: 'Sora', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 40px; 
+    min-width: 80px;
+    cursor: pointer;
+    
+    /* Animation Init State */
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: cineFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Staggered Delay for Dramatic Fade In */
+.nav-list-cine li:nth-child(1) .cine-link { animation-delay: 0.2s; }
+.nav-list-cine li:nth-child(2) .cine-link { animation-delay: 0.4s; }
+.nav-list-cine li:nth-child(3) .cine-link { animation-delay: 0.6s; }
+.nav-list-cine li:nth-child(4) .cine-link { animation-delay: 0.8s; }
+.nav-list-cine li:nth-child(5) .cine-link { animation-delay: 1.0s; }
+.nav-list-cine li:nth-child(6) .cine-link { animation-delay: 1.2s; }
+
+@keyframes cineFadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- HOVER TRANSFORMATION (Text -> Icon) --- */
+.cine-link .text-label {
+    display: block;
     position: absolute;
-    top: 11px; right: 13px;
-    transition: color 0.3s;
-    transition: transform 0.3s;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    opacity: 1;
+    transform: scale(1);
 }
-.sticky-burger svg .line {
-    stroke: var(--secondary-font);;
+
+.cine-link ion-icon {
+    font-size: 1.4rem;
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: absolute;
 }
-.sticky-burger:hover svg .line {
-   animation: glow-white 2s infinite;
+
+/* Hover States */
+.cine-link:hover .text-label {
+    opacity: 0;
+    transform: scale(0);
 }
+
+.cine-link:hover ion-icon {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+/* --- MOBILE HIDDEN --- */
+@media screen and (max-width: 1024px) {
+    .cinematic-nav { display: none !important; }
+}
+
 
 /* =========================================
-   CREATIVE BUTTON STYLES (New)
+   REMOVED OLD STICKY NAV CSS
    ========================================= */
-.button-creative {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5em 1.5em; /* Adjusted size for navbar */
-  background: var(--primary-bg);
-  color: var(--secondary-font);
-  border: 0px solid rgba(255, 255, 255, 0);
-  cursor: pointer;
-  overflow: hidden;
-  transition: color 0.3s, border-color 0.3s;
-  font-size: 0.8rem; /* Smaller font for navbar */
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  font-weight: 100;
-  border-radius: 30px;
-  position: absolute;
-  top: 11px; left: 31%;
-  transition: color 0.3s;
-  z-index: 1;
-  height: 40px; /* Fits inside 60px sticky nav */
-}
-
-.button-creative span {
-    position: relative;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.button-creative::before {
-  content: '';
-  position: absolute;
-  left: var(--x, 50%);
-  top: var(--y, 50%);
-  width: 150px; /* Reduced glow size */
-  height: 150px;
-  background: radial-gradient(circle, var(--secondary-font) 10%, transparent 70%);
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.4s ease;
-  border-radius: 50%;
-  opacity: 0.6;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.button-creative:hover::before {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.button-creative:hover {
-  color: var(--primary-bg);;
-  border-color: rgba(0, 0, 0, 0.3);
-}
+/* Deoarece am inlocuit sistemul vechi, am comentat stilurile vechi care nu mai sunt necesare.
+   Burger-ul ramane doar pentru functionalitatea overlay-ului daca este necesar pe mobile
+   dar meniul stick-y este scos.
+*/
 
 /* =========================================
    BURGER MENU (MAIN) - DESIGN & POSITIONING
@@ -470,7 +439,7 @@ body { background: var(--dark-bg); font-family: 'Sora', sans-serif; overflow-x: 
     .nav-footer { flex-direction: column; align-items: flex-start; gap: 15px; }
     
     /* Pe mobil, de obicei sticky-nav este mai mic sau ascuns, dar il lasam activ pentru consistenta */
-    .sticky-nav { width: 95%; height: 50px; }
+    /* .sticky-nav { width: 95%; height: 50px; } - REMOVED OLD */
     /* ASCUNDEM BUTONUL CREATIV PE ECRANE MICI PENTRU A NU STRICA LAYOUT-UL COMPACT */
     .button-creative { display: none; }
 }
@@ -522,7 +491,7 @@ body {
     .nav-footer { flex-direction: column; align-items: center; gap: 15px; position: relative; top: -100px;}
     
     /* Pe mobil, de obicei sticky-nav este mai mic sau ascuns, dar il lasam activ pentru consistenta */
-    .sticky-nav { width: 95%; height: 50px; }
+    /* .sticky-nav { width: 95%; height: 50px; } - REMOVED OLD */
     /* ASCUNDEM BUTONUL CREATIV PE ECRANE MICI PENTRU A NU STRICA LAYOUT-UL COMPACT */
     .button-creative { display: none; }
 }

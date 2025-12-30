@@ -26,26 +26,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
+  <header>
+    <!-- CINEMATIC NAVBAR SYSTEM -->
+    <nav class="cinematic-nav">
+        <ul class="nav-list-cine">
+            <li>
+                <a href="#about" class="cine-link">
+                    <span class="text-label">About</span>
+                    <ion-icon name="person-outline"></ion-icon>
+                </a>
+            </li>
+            <li>
+                <a href="#cv-section" class="cine-link">
+                    <span class="text-label">Skills</span>
+                    <ion-icon name="code-slash-outline"></ion-icon>
+                </a>
+            </li>
+            <li>
+                <a href="#projects" class="cine-link">
+                    <span class="text-label">Projects</span>
+                    <ion-icon name="layers-outline"></ion-icon>
+                </a>
+            </li>
+            <li>
+                <a href="#reviews" class="cine-link">
+                    <span class="text-label">Reviews</span>
+                    <ion-icon name="star-outline"></ion-icon>
+                </a>
+            </li>
+        </ul>
+    </nav>
+  </header>
 <div id="scroll-progress">
   <span></span>
 </div>
 
-    <!-- Canvas pentru ninsoare globala -->
     <canvas id="snow-container"></canvas>
 
-    <!-- GoT Loading Screen -->
     <div id="winter-loader">
         <div class="mist-layer"></div>
         <div class="got-text" id="got-message">Winter Is Coming</div>
         <div class="got-line"></div>
     </div>
 
-    <!-- Theme Trigger -->
     <div id="theme-trigger" class="side-tab">
         <span class="tab-text">THEMES</span>
     </div>
 
-    <!-- Theme Loader -->
     <div id="loading-overlay">
         <div class="loader-content">
             <div class="fleur-wrapper">
@@ -56,21 +83,22 @@
         </div>
     </div>
 
-    <!-- Theme Drawer -->
     <div id="theme-drawer" class="theme-wrapper">
         <div class="theme-panel">
+            <div class="close-btn" id="close-menu-btn">×</div>
             
-            <!-- HEADER RESTORED & TABS INTEGRATED -->
+            <!-- NEW HEADER LAYOUT -->
             <div class="panel-header">
                 <h3>Appearance</h3>
+                
                 <div class="tabs-nav">
-                    <button class="tab-link active" data-target="themes">THEMES</button>
-                    <button class="tab-link" data-target="effects">EFFECTS</button>
+                    <div class="tab-indicator" id="tab-line"></div>
+                    <button class="tab-btn active" id="btn-themes" data-target="themes">THEMES</button>
+                    <button class="tab-btn" id="btn-effects" data-target="effects">EFFECTS</button>
                 </div>
             </div>
 
             <div class="panel-content">
-                
                 <!-- VIEW 1: THEMES -->
                 <div id="view-themes" class="tab-view active">
                     <div class="theme-section">
@@ -99,7 +127,7 @@
                     </div>
                 </div>
 
-                <!-- EFFECTS VIEW -->
+                <!-- VIEW 2: EFFECTS -->
                 <div id="view-effects" class="tab-view">
                     <div class="theme-section">
                         <span class="section-label">Seasonal Effects</span>
@@ -120,83 +148,71 @@
 <main>
 
 <section id="home">
-    <!-- 
-        NOUL WRAPPER BACKGROUND 
-        Include imaginea de bază și canvas-ul pentru efect.
-    -->
+    <!-- WRAPPER BACKGROUND 95% -->
     <div class="bg-reveal-wrapper">
-        <!-- Imaginea de bază (vizibilă mereu, schimbată pe mobile cu cea de effect) -->
         <div class="bg-base"></div>
-        <!-- Canvas-ul unde se randează efectul de reveal (doar desktop) -->
         <canvas id="reveal-canvas"></canvas>
-        <!-- Masca de gradient (păstrată pentru lizibilitate text) -->
         <div class="video-gradient-overlay"></div>
     </div>
 
     <div class="home-content">
-        <div class="logo-wrapper">
-            <a href="https://andzcr.github.io" style="text-decoration: none; color: inherit;">
-                <span class="logo-symbol">⚜</span>
-            </a>
-        </div>
-
-        <div class="bottom-left">
-            <span class="vision">Where Your <br><span class="vision-mind">Mind</span></span></div>
-        <div class="bottom-left-second">
-            <span class="static-text">Meets the </span></div>
-            
-            <!-- ROTATOR WRAPPER -->
-            <div class="word-rotator">
-                <!-- Cuvântul activ inițial -->
-                <span class="rotating-word active">Impossible.</span>
-                <span class="rotating-word">Creativity.</span>
-                <span class="rotating-word">Perfection.</span>
+        <!-- TOP LEFT: LOGO 3D + NAME + SUBTITLE SWITCHER -->
+        <div class="top-left-brand">
+            <div class="logo-3d-wrapper">
+                <div class="logo-3d-scene">
+                    <div class="logo-3d-obj">
+                        <span class="logo-layer l1">⚜</span>
+                        <span class="logo-layer l2">⚜</span>
+                        <span class="logo-layer l3">⚜</span>
+                        <span class="logo-layer l4">⚜</span>
+                        <span class="logo-layer l5">⚜</span>
+                    </div>
+                </div>
+            </div>
+            <div class="brand-text">
+                <h1 class="brand-name">ANDZ</h1>
+                <!-- NEW SUBTITLE ROTATOR -->
+                <div class="brand-sub-rotator" id="subtitle-rotator">
+                    <span class="brand-sub-item active">BRAND DESIGNER</span>
+                    <span class="brand-sub-item">WEB DEVELOPER</span>
+                    <span class="brand-sub-item">CONTENT CREATOR</span>
+                </div>
             </div>
         </div>
 
-        <!-- LEFT BADGE: PROJECTS -->
-        <div class="smart-badge-wrapper left">
-            <a href="#projects" class="smart-badge project-badge">
-                <div class="badge-label">
-                    <span class="badge-icon"><ion-icon name="layers-outline"></ion-icon></span>
-                    <span class="badge-text">Latest Work</span>
-                </div>
+        <!-- TOP RIGHT: SOCIAL SLIDER -->
+        <div class="social-slider-container">
+            <div class="social-track">
+                <!-- ITEMS (Duplicated for infinite loop) -->
+                <!-- Set 1 -->
+                <a href="https://github.com/andzcr" target="_blank" class="social-pill"><ion-icon name="logo-github"></ion-icon><span class="social-tooltip">GitHub</span></a>
+                <a href="https://linkedin.com/in/lehadus-andrei-25a807372/" target="_blank" class="social-pill"><ion-icon name="logo-linkedin"></ion-icon><span class="social-tooltip">LinkedIn</span></a>
+                <a href="https://instagram.com/ndr.xc" target="_blank" class="social-pill"><ion-icon name="logo-instagram"></ion-icon><span class="social-tooltip">Instagram</span></a>
+                <a href="https://tiktok.com/@andrei38axc" target="_blank" class="social-pill"><ion-icon name="logo-tiktok"></ion-icon><span class="social-tooltip">TikTok</span></a>
+                <a href="mailto:andz.contact@gmail.com" class="social-pill"><ion-icon name="mail-outline"></ion-icon><span class="social-tooltip">Email</span></a>
+                <a href="https://youtube.com/@visualssamp" target="_blank" class="social-pill"><ion-icon name="logo-youtube"></ion-icon><span class="social-tooltip">YouTube</span></a>
+                <!-- Set 2 -->
+                <a href="https://github.com/andzcr" target="_blank" class="social-pill"><ion-icon name="logo-github"></ion-icon><span class="social-tooltip">GitHub</span></a>
+                <a href="https://linkedin.com/in/lehadus-andrei-25a807372/" target="_blank" class="social-pill"><ion-icon name="logo-linkedin"></ion-icon><span class="social-tooltip">LinkedIn</span></a>
+                <a href="https://instagram.com/ndr.xc" target="_blank" class="social-pill"><ion-icon name="logo-instagram"></ion-icon><span class="social-tooltip">Instagram</span></a>
+                <a href="https://tiktok.com/@andrei38axc" target="_blank" class="social-pill"><ion-icon name="logo-tiktok"></ion-icon><span class="social-tooltip">TikTok</span></a>
+                <a href="mailto:andz.contact@gmail.com" class="social-pill"><ion-icon name="mail-outline"></ion-icon><span class="social-tooltip">Email</span></a>
+                <a href="https://youtube.com/@visualssamp" target="_blank" class="social-pill"><ion-icon name="logo-youtube"></ion-icon><span class="social-tooltip">YouTube</span></a>
+            </div>
+        </div>
 
-                <div class="badge-content">
-                    <div class="badge-video-container">
-                        <video class="badge-video active" muted playsinline preload="auto">
-                            <source src="https://andzcr.github.io/resources/videos/home_land.mp4" type="video/mp4">
-                        </video>
-                        <video class="badge-video" muted playsinline preload="auto">
-                            <source src="https://res.cloudinary.com/df9syoltz/video/upload/v1764524717/1130_1_2_ptidlk.mp4" type="video/mp4">
-                        </video>
-                        <div class="badge-mask"></div>
-                    </div>
-
-                    <div class="badge-info">
-                        <div class="info-top">
-                            <div class="meta-group">
-                                <span class="tech-stack"></span>
-                            </div>
-                        </div>
-                        
-                        <div class="info-bottom">
-                            <div class="title-group">
-                                <h4 class="project-title"></h4>
-                                <span class="project-tagline"></span>
-                            </div>
-                            <div class="arrow-btn">
-                                 <ion-icon name="arrow-forward-outline"></ion-icon>
-                            </div>
-                        </div>
-                        
-                        <div class="progress-track">
-                            <div class="progress-fill"></div>
-                        </div>
-                    </div>
+        <!-- BOTTOM LEFT: TEXT LAYOUT (STRICT ALIGNMENT) -->
+        <div class="bottom-left-group">
+            <div class="vision-top">WHERE YOUR MIND</div>
+            <div class="vision-main-row">
+                <span class="vision-main">MEETS</span>
+                <!-- MAIN ROTATOR (BUG FIXED) -->
+                <div class="word-rotator" id="main-rotator">
+                    <span class="rotating-word active">Impossible.</span>
+                    <span class="rotating-word">Creativity.</span>
+                    <span class="rotating-word">Perfection.</span>
                 </div>
-                <div class="magnetic-glow"></div>
-            </a>
+            </div>
         </div>
 
         <!-- RIGHT BADGE: CONTACT -->
@@ -206,41 +222,25 @@
                     <span class="badge-text">Get in touch</span>
                     <ion-icon name="checkmark-done-outline"></ion-icon>
                 </div>
-
                 <div class="badge-content">
                     <div class="badge-abstract-bg">
                         <div class="noise-overlay"></div>
                         <div class="gradient-mesh"></div>
                     </div>
-
                     <div class="badge-info contact-layout">
-                        <div class="c-header">
-                            <h3 class="c-title">Let's work together.</h3>
-                        </div>
+                        <div class="c-header"><h3 class="c-title">Let's work together.</h3></div>
                         <div class="c-body">
                             <div class="c-row">
-                                <div class="c-icon-circle">
-                                    <ion-icon name="mail-open-outline"></ion-icon>
-                                </div>
-                                <div class="c-info">
-                                    <span class="c-type">Email Address</span>
-                                    <span class="c-value">andz.contact@gmail.com</span>
-                                </div>
+                                <div class="c-icon-circle"><ion-icon name="mail-open-outline"></ion-icon></div>
+                                <div class="c-info"><span class="c-type">Email Address</span><span class="c-value">andz.contact@gmail.com</span></div>
                             </div>
                             <div class="c-row">
-                                <div class="c-icon-circle">
-                                    <ion-icon name="phone-portrait-outline"></ion-icon>
-                                </div>
-                                <div class="c-info">
-                                    <span class="c-type">Phone Number</span>
-                                    <span class="c-value">+40 748 594 335</span>
-                                </div>
+                                <div class="c-icon-circle"><ion-icon name="phone-portrait-outline"></ion-icon></div>
+                                <div class="c-info"><span class="c-type">Phone Number</span><span class="c-value">+40 748 594 335</span></div>
                             </div>
                         </div>
                         <div class="c-footer">
-                            <div class="c-location">
-                                <span class="loc-dot"></span> Galati, RO
-                            </div>
+                            <div class="c-location"><span class="loc-dot"></span> Galati, RO</div>
                             <div class="c-action-text">Go to Contact <ion-icon name="arrow-forward"></ion-icon></div>
                         </div>
                     </div>
@@ -567,10 +567,6 @@
       </div>
     </div>
   </div>
-</section>
-
-<section id="brands">
-  
 </section>
 
 <section id="reviews">

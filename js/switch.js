@@ -1,11 +1,17 @@
-        document.addEventListener('DOMContentLoaded', () => {
-            /* --- THEME LOGIC --- */
+       document.addEventListener('DOMContentLoaded', () => {
+            /* --- VARS --- */
             const themeTrigger = document.getElementById('theme-trigger');
             const themeDrawer = document.getElementById('theme-drawer');
+            const closeBtn = document.getElementById('close-menu-btn');
             const themePanel = document.querySelector('.theme-panel');
             const themeBtns = document.querySelectorAll('.theme-btn:not(#winter-card)'); 
             const loadingOverlay = document.getElementById('loading-overlay');
             const STORAGE_KEY = 'user_theme_preference';
+
+            // Tab elements
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabLine = document.getElementById('tab-line');
+            let currentView = 'view-themes';
 
             const themeCornerColors = {
                 'default': ['#333333', '#111111'], 'light': ['#7c9fab', '#ffffffff'], 'midnight-purple': ['#8800ffff', '#000000ff'],
@@ -13,15 +19,99 @@
                 'golden-noir': ['#fbbf24', '#78350f'], 'sage-aura': ['#86efac', '#166534']
             };
 
+            /* --- INITIAL SETUP --- */
             const savedTheme = localStorage.getItem(STORAGE_KEY) || 'default';
             applyTheme(savedTheme, false);
             updateActiveButton(savedTheme);
+            // Delay line init slightly for DOM layout
+            setTimeout(() => moveLine(document.querySelector('.tab-btn.active')), 100);
 
-            themeTrigger.addEventListener('click', () => { themeDrawer.classList.add('open'); themeTrigger.classList.add('hidden'); });
-            const closeMenu = () => { themeDrawer.classList.remove('open'); themeTrigger.classList.remove('hidden'); };
+            /* --- DRAWER LOGIC --- */
+            themeTrigger.addEventListener('click', () => { 
+                themeDrawer.classList.add('open'); 
+                themeTrigger.classList.add('hidden');
+                // Trigger entry animation for current view items
+                animateItemsEntry(currentView);
+            });
+
+            const closeMenu = () => { 
+                themeDrawer.classList.remove('open'); 
+                themeTrigger.classList.remove('hidden'); 
+            };
+
+            closeBtn.addEventListener('click', closeMenu);
             themeDrawer.addEventListener('click', (e) => { if (e.target === themeDrawer) closeMenu(); });
-            themePanel.addEventListener('mouseleave', () => { setTimeout(() => { if(!themePanel.matches(':hover')) closeMenu(); }, 300); themePanel.classList.remove('glow-active'); });
+            themePanel.addEventListener('mouseleave', () => { 
+                // Only auto-close on desktop
+                if(window.innerWidth > 768) {
+                    setTimeout(() => { if(!themePanel.matches(':hover')) closeMenu(); }, 300); 
+                    themePanel.classList.remove('glow-active');
+                }
+            });
 
+            /* --- ANIMATION LOGIC (STAGGER) --- */
+            function animateItemsEntry(viewId) {
+                const view = document.getElementById(viewId);
+                const items = view.querySelectorAll('.theme-btn');
+                items.forEach((btn, index) => {
+                    // Increased delay for dramatic cascade (0.15s step)
+                    btn.style.animationDelay = `${index * 0.15}s`;
+                    btn.classList.remove('anim-exit');
+                    btn.classList.add('anim-enter');
+                });
+            }
+
+            function animateItemsExit(viewId, callback) {
+                const view = document.getElementById(viewId);
+                const items = view.querySelectorAll('.theme-btn');
+                
+                items.forEach((btn, index) => {
+                    btn.style.animationDelay = `${index * 0.05}s`; // Faster exit
+                    btn.classList.remove('anim-enter');
+                    btn.classList.add('anim-exit');
+                });
+
+                setTimeout(callback, 300); 
+            }
+
+            /* --- TABS LOGIC --- */
+            function moveLine(target) {
+                if(!target) return;
+                tabLine.style.width = `${target.offsetWidth}px`;
+                tabLine.style.left = `${target.offsetLeft}px`;
+            }
+
+            tabBtns.forEach(btn => {
+                // Hover effect for line
+                btn.addEventListener('mouseenter', () => moveLine(btn));
+                btn.addEventListener('mouseleave', () => moveLine(document.querySelector('.tab-btn.active')));
+
+                // Click switch
+                btn.addEventListener('click', () => {
+                    if (btn.classList.contains('active')) return;
+
+                    const targetView = `view-${btn.dataset.target}`;
+                    const prevView = currentView;
+
+                    // Update Active State UI
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    moveLine(btn);
+
+                    // 1. Animate Out Current
+                    animateItemsExit(prevView, () => {
+                        // 2. Hide Old, Show New
+                        document.getElementById(prevView).classList.remove('active');
+                        document.getElementById(targetView).classList.add('active');
+                        currentView = targetView;
+
+                        // 3. Animate In New
+                        animateItemsEntry(targetView);
+                    });
+                });
+            });
+
+            /* --- THEME CARDS LOGIC --- */
             themeBtns.forEach(btn => {
                 btn.addEventListener('mousemove', (e) => {
                     const rect = btn.getBoundingClientRect();
@@ -45,11 +135,18 @@
             });
 
             function handleThemeTransition(themeName) {
+                // --- FIX APPLIED HERE: CLOSE MENU IMMEDIATELY ---
+                closeMenu(); 
+                
                 const colors = getThemeColors(themeName);
                 document.documentElement.style.setProperty('--load-bg', colors.bg);
                 document.documentElement.style.setProperty('--load-color', colors.text);
                 loadingOverlay.classList.add('active');
-                setTimeout(() => { applyTheme(themeName, true); updateActiveButton(themeName); setTimeout(() => { loadingOverlay.classList.remove('active'); }, 500); }, 1500); 
+                setTimeout(() => { 
+                    applyTheme(themeName, true); 
+                    updateActiveButton(themeName); 
+                    setTimeout(() => { loadingOverlay.classList.remove('active'); }, 500); 
+                }, 1500); 
             }
             function applyTheme(t, s) { if(t === 'default') document.body.removeAttribute('data-theme-style'); else document.body.setAttribute('data-theme-style', t); if(s) localStorage.setItem(STORAGE_KEY, t); }
             function updateActiveButton(t) { themeBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-theme') === t)); }
@@ -57,18 +154,6 @@
                 const map = { 'light': {bg:'#fff',text:'#7c9fab'}, 'midnight-purple': {bg:'#020005',text:'#d8b4fe'}, 'blood-cream': {bg:'#1a0505',text:'#ebe5c9'}, 'wine-cloud': {bg:'#f3f0fa',text:'#5e4074'}, 'pure-ivory': {bg:'#f9f8f4',text:'#33312e'}, 'golden-noir': {bg:'#080808',text:'#d4af37'}, 'sage-aura': {bg:'#141814',text:'#8fb38f'} };
                 return map[t] || {bg:'#050505',text:'#fff'};
             }
-
-            /* --- TABS --- */
-            const tabLinks = document.querySelectorAll('.tab-link');
-            const tabViews = document.querySelectorAll('.tab-view');
-            tabLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    tabLinks.forEach(l => l.classList.remove('active'));
-                    tabViews.forEach(v => v.classList.remove('active'));
-                    link.classList.add('active');
-                    document.getElementById(`view-${link.dataset.target}`).classList.add('active');
-                });
-            });
 
             /* =========================================
                WINTER MODE LOGIC 
@@ -88,7 +173,8 @@
                 const r = winterCard.getBoundingClientRect(); 
                 btnCanvas.width = r.width; btnCanvas.height = r.height; 
             }
-            setTimeout(resizeBtn, 500); // Init size
+            // Init size slightly delayed to ensure DOM render
+            setTimeout(resizeBtn, 500); 
 
             class BtnFlake {
                 constructor() {
@@ -96,13 +182,12 @@
                     this.y = -5;
                     this.size = Math.random() * 1.5 + 0.5;
                     // SLOWER SPEED
-                    this.speed = Math.random() * 0.4 + 0.1;
+                    this.speed = Math.random() * 0.4 + 0.1; // Slow
                     this.opacity = Math.random() * 0.5 + 0.3;
                 }
                 update() { this.y += this.speed; }
                 draw() {
                     btnCtx.beginPath();
-                    // Imitate CSS Gradient look
                     const g = btnCtx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
                     g.addColorStop(0, `rgba(255,255,255,${this.opacity})`);
                     g.addColorStop(1, `rgba(255,255,255,0)`);
@@ -114,27 +199,16 @@
 
             function animateBtnSnow() {
                 btnCtx.clearRect(0, 0, btnCanvas.width, btnCanvas.height);
-                
                 if (btnHovering && Math.random() < 0.2) btnFlakes.push(new BtnFlake());
-
                 for (let i = 0; i < btnFlakes.length; i++) {
-                    let f = btnFlakes[i];
-                    f.update();
-                    f.draw();
+                    let f = btnFlakes[i]; f.update(); f.draw();
                     if (f.y > btnCanvas.height) { btnFlakes.splice(i, 1); i--; }
                 }
-
                 if (btnFlakes.length > 0 || btnHovering) btnAnimId = requestAnimationFrame(animateBtnSnow);
             }
 
-            winterCard.addEventListener('mouseenter', () => {
-                resizeBtn();
-                btnHovering = true;
-                if(btnFlakes.length === 0) animateBtnSnow();
-            });
-            winterCard.addEventListener('mouseleave', () => {
-                btnHovering = false; // Let them fall out naturally
-            });
+            winterCard.addEventListener('mouseenter', () => { resizeBtn(); btnHovering = true; if(btnFlakes.length === 0) animateBtnSnow(); });
+            winterCard.addEventListener('mouseleave', () => { btnHovering = false; });
 
             // --- 2. GLOBAL SNOW (PREMIUM PHYSICS) ---
             const ctx = snowCanvas.getContext('2d');
@@ -155,43 +229,29 @@
                     // Types
                     const rand = Math.random();
                     if (rand < 0.7) this.type = 'bokeh'; else if (rand < 0.9) this.type = 'crystal'; else this.type = 'stardust';
-                    
                     this.z = Math.random();
                     
-                    // SLOWER PREMIUM SPEED
                     if (this.type === 'bokeh') {
-                        this.size = (this.z * 3.5) + 1.5; // Smaller
-                        this.opacity = (this.z * 0.2) + 0.05; // Fainter
-                        this.speedY = (this.z * 0.6) + 0.2; // Slow
+                        this.size = (this.z * 3.5) + 1.5; this.opacity = (this.z * 0.2) + 0.05; this.speedY = (this.z * 0.6) + 0.2;
                     } else if (this.type === 'crystal') {
-                        this.size = (this.z * 4.5) + 2; 
-                        this.opacity = (this.z * 0.4) + 0.3;
-                        this.speedY = (this.z * 0.9) + 0.4;
+                        this.size = (this.z * 4.5) + 2; this.opacity = (this.z * 0.4) + 0.3; this.speedY = (this.z * 0.9) + 0.4;
                     } else {
-                        this.size = (Math.random() * 1.5) + 0.5;
-                        this.opacity = Math.random() * 0.8;
-                        this.speedY = (this.z * 0.5) + 0.1;
+                        this.size = (Math.random() * 1.5) + 0.5; this.opacity = Math.random() * 0.8; this.speedY = (this.z * 0.5) + 0.1;
                     }
-                    this.angle = Math.random() * Math.PI * 2;
-                    this.spin = (Math.random() - 0.5) * 0.03;
-                    this.vx = 0; this.vy = 0;
-                    this.swayFreq = Math.random() * 0.02 + 0.005; this.swayAmp = Math.random() * 0.5;
+                    this.angle = Math.random() * Math.PI * 2; this.spin = (Math.random() - 0.5) * 0.03;
+                    this.vx = 0; this.vy = 0; this.swayFreq = Math.random() * 0.02 + 0.005; this.swayAmp = Math.random() * 0.5;
                 }
                 update() {
                     this.y += this.speedY;
                     const windEffect = windActual * (1.5 - this.z); 
                     this.x += Math.sin(this.y * this.swayFreq) * this.swayAmp + windEffect;
-                    
-                    // Mouse Interaction
                     const dx = this.x - mouseX, dy = this.y - mouseY;
                     const dist = Math.sqrt(dx*dx + dy*dy);
                     if (dist < 150) {
-                        const force = (150 - dist) / 150;
-                        const angle = Math.atan2(dy, dx);
+                        const force = (150 - dist) / 150; const angle = Math.atan2(dy, dx);
                         this.vx += Math.cos(angle) * force * 0.8; this.vy += Math.sin(angle) * force * 0.8;
                     }
                     this.x += this.vx; this.y += this.vy; this.vx *= 0.92; this.vy *= 0.92; this.angle += this.spin;
-
                     if (!isStopping) {
                         if (this.y > snowCanvas.height + 20) this.init(false);
                         if (this.x > snowCanvas.width + 20) this.x = -20; if (this.x < -20) this.x = snowCanvas.width + 20;
@@ -222,26 +282,23 @@
             function animateGlobal() {
                 if (!isWinterActive && flakes.length === 0) {
                     ctx.clearRect(0,0, snowCanvas.width, snowCanvas.height);
-                    snowCanvas.classList.remove('snowing');
-                    return;
+                    snowCanvas.classList.remove('snowing'); return;
                 }
                 const time = Date.now();
                 if (Math.random() < 0.005) windTarget = (Math.random() - 0.5) * 3;
                 windActual += (windTarget - windActual) * 0.01;
                 ctx.clearRect(0,0, snowCanvas.width, snowCanvas.height);
-                
                 for (let i = 0; i < flakes.length; i++) {
-                    let f = flakes[i];
-                    f.update();
-                    f.draw();
-                    if (isStopping && f.y > snowCanvas.height + 20) {
-                        flakes.splice(i, 1); i--;
-                    }
+                    let f = flakes[i]; f.update(); f.draw();
+                    if (isStopping && f.y > snowCanvas.height + 20) { flakes.splice(i, 1); i--; }
                 }
                 snowAnimId = requestAnimationFrame(animateGlobal);
             }
 
             winterCard.addEventListener('click', () => {
+                // CLOSE MENU INSTANTLY
+                closeMenu(); 
+
                 winterLoader.classList.add('active');
                 if (!isWinterActive) winterText.innerText = "Winter Is Coming";
                 else winterText.innerText = "Winter Has Ended";
@@ -253,7 +310,7 @@
                         isStopping = false;
                         winterCard.classList.add('winter-active');
                         snowCanvas.classList.add('snowing');
-                        flakes = []; for(let i=0; i<85; i++) flakes.push(new Flake()); // Low count
+                        flakes = []; for(let i=0; i<85; i++) flakes.push(new Flake());
                         animateGlobal();
                     } else {
                         // STOP (Graceful)

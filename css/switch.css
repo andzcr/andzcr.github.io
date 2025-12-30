@@ -1,5 +1,5 @@
-        /* =========================================
-           1. CORE VARIABLES & RESET
+       /* =========================================
+           1. ROOT & VARIABLES
            ========================================= */
         :root {
             /* UI Switcher Vars */
@@ -9,6 +9,7 @@
             --text-main: #fff;
             --text-sub: rgba(235, 235, 245, 0.6);
             --section-label: rgba(235, 235, 245, 0.5);
+            /* Added easing for smooth animations */
             --easing: cubic-bezier(0.23, 1, 0.32, 1);
 
             /* Loading Colors */
@@ -32,8 +33,25 @@
             min-height: 100vh;
         }
 
+        /* Demo Content Styling */
+        .demo-content {
+            padding: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .demo-content h1 {
+            font-family: 'Sora', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .demo-content p {
+            line-height: 1.6;
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
         /* =========================================
-           2. THEME DEFINITIONS (FULL RESTORED)
+           2. THEME DEFINITIONS (FULL)
            ========================================= */
 
         /* 1. LIGHT MODE */
@@ -43,7 +61,7 @@
             --primary-font: #000000;
             --premium-gradient: linear-gradient(-45deg, #ffffff, #7c9fab);
             --premium-gradient-two: linear-gradient(135deg, #e0e0e0, #ffffff);
-            --panel-bg: rgba(255, 255, 255, 0.6); /* Slightly higher opacity for light */
+            --panel-bg: rgba(255, 255, 255, 0.373);
             --panel-border: rgba(0, 0, 0, 0.05);
             --text-main: #000;
             --text-sub: rgba(60, 60, 67, 0.6);
@@ -56,6 +74,7 @@
             --footer-font: black;
             --secondary-font: white;
             --scrolling-bar: #7c9fab;
+            --primary-mask: transparent;
         }
 
         /* 2. MIDNIGHT PURPLE */
@@ -66,6 +85,7 @@
             --premium-gradient-two: linear-gradient(135deg, #3b0054, #05000a);
             --panel-bg: rgba(20, 10, 30, 0.7);
             --scrolling-bar: #75169e;
+            --primary-mask: #05000a;
         }
 
         /* 3. BLOOD CREAM */
@@ -81,6 +101,7 @@
             --section-label: rgba(123, 1, 30, 0.5);
             --footer-font: #f5f1e6;
             --scrolling-bar: #f5f1e6;
+            --primary-mask: #160a0a;
         }
 
         /* 4. WINE CLOUD */
@@ -96,6 +117,7 @@
             --footer-font: #42354e;
             --secondary-font: #f9f6ec;
             --scrolling-bar: #f9f6ec;
+            --primary-mask: #42354a;
         }
 
         /* 5. PURE IVORY */
@@ -111,6 +133,7 @@
             --footer-font: #2b2b2b;
             --secondary-font: #aeada8;
             --scrolling-bar: #aeada8;
+            --primary-mask: #fff7ee;
         }
 
         /* 6. GOLDEN NOIR */
@@ -127,6 +150,7 @@
             --secondary-font: white;
             --footer-font: #d4af37;
             --scrolling-bar: #d4af37;
+            --primary-mask: #050505;
         }
 
         /* 7. SAGE AURA */
@@ -141,6 +165,7 @@
             --text-sub: rgba(163, 177, 138, 0.6);
             --section-label: rgba(163, 177, 138, 0.5);
             --scrolling-bar: #daddd8;
+            --primary-mask: #1c1e1c;
         }
 
         /* =========================================
@@ -238,8 +263,8 @@
             transform: translateX(100%);
             opacity: 0;
             transition: transform 0.5s var(--easing), opacity 0.4s ease;
-            
             position: relative;
+            /* Default variables for glow */
             --corner-top: transparent;
             --corner-bottom: transparent;
         }
@@ -247,6 +272,21 @@
         .theme-wrapper.open .theme-panel {
             transform: translateX(0);
             opacity: 1;
+        }
+
+        /* --- MOBILE FULLSCREEN --- */
+        .close-btn {
+            position: absolute; top: 25px; left: 25px; 
+            font-size: 24px; color: var(--text-sub); cursor: pointer;
+            z-index: 10; display: none; transition: 0.3s;
+        }
+        .close-btn:hover { color: var(--text-main); transform: scale(1.1); }
+
+        @media (max-width: 768px) {
+            .theme-panel {
+                width: 100vw; max-width: 100vw; border-radius: 0; border: none;
+            }
+            .close-btn { display: block; }
         }
 
         /* --- PANEL CORNER GLOW (IMPROVED + ANIMATED TRANSITION) --- */
@@ -258,7 +298,6 @@
             border-radius: 50%;
             filter: blur(100px);
             opacity: 0;
-            /* Added 'background' to transition for smooth color morphing */
             transition: opacity 0.6s ease, background 0.6s ease;
             z-index: -1; 
             pointer-events: none;
@@ -294,62 +333,57 @@
             to { transform: scale(1.1); }
         }
 
-        /* --- HEADER & TABS (Restored & Integrated) --- */
+        /* --- HEADER & TABS (NEW LAYOUT) --- */
         .panel-header {
-            padding: 30px 24px 10px 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 15px;
-            flex-shrink: 0; /* Prevent header shrinking */
+            padding: 35px 24px 25px 24px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; /* Align vertically */
+            flex-shrink: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
-
+        [data-theme-style="light"] .panel-header { border-bottom-color: rgba(0,0,0,0.08); }
+        
         .panel-header h3 {
             margin: 0;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--text-main);
             letter-spacing: -0.02em;
             font-family: 'Sora', sans-serif;
         }
 
-        /* Tabs Nav Container */
+        /* Tabs Nav (Compact Right Side) */
         .tabs-nav {
             display: flex;
             gap: 20px;
-            width: 100%;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 0;
+            position: relative;
         }
-        [data-theme-style="light"] .tabs-nav { border-bottom-color: rgba(0,0,0,0.1); }
 
-        .tab-link {
+        .tab-btn {
             background: none;
             border: none;
+            padding: 5px 0;
             color: var(--text-sub);
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
             cursor: pointer;
-            padding: 0 0 10px 0;
             position: relative;
             font-family: -apple-system, sans-serif;
             transition: color 0.3s ease;
             text-transform: uppercase;
         }
 
-        .tab-link:hover { color: var(--text-main); }
-        .tab-link.active { color: var(--text-main); }
+        .tab-btn:hover { color: var(--text-main); }
+        .tab-btn.active { color: var(--text-main); }
 
-        .tab-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--text-main);
-            border-radius: 2px;
+        /* Sliding Line */
+        .tab-indicator {
+            position: absolute; bottom: 0; height: 2px;
+            background: var(--text-main); border-radius: 2px;
+            transition: left 0.4s var(--easing), width 0.4s var(--easing);
+            pointer-events: none;
         }
 
         /* --- PANEL CONTENT --- */
@@ -357,21 +391,9 @@
             padding: 0 24px 24px 24px; 
             overflow-y: auto; 
             scrollbar-width: none; 
-            flex: 1; /* Take remaining space */
+            flex: 1; 
         }
         .panel-content::-webkit-scrollbar { display: none; }
-
-        /* View transition animation */
-        .tab-view {
-            display: none; /* Hidden by default */
-            animation: fadeInView 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .tab-view.active { display: block; }
-
-        @keyframes fadeInView {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
 
         .section-label {
             display: block; 
@@ -396,6 +418,9 @@
             text-align: left;
             background: transparent;
             border: none;
+            /* Base Animation State */
+            opacity: 0; 
+            transform: translateY(30px);
         }
 
         /* --- CARDS VISUALS --- */
@@ -492,7 +517,6 @@
         }
         .win-line.short { width: 40%; }
 
-        /* Theme Specific Colors */
         .style-midnight .win-sidebar { background: #2a0038; border-right: 1px solid rgba(255,255,255,0.1); }
         .style-midnight .win-content { background: #05000a; color: #fff; }
         .style-blood .win-sidebar { background: #7b011e; border-right: 1px solid rgba(255,255,255,0.1); }
@@ -510,11 +534,11 @@
         .col-title { font-size: 13px; font-weight: 600; color: var(--text-main); letter-spacing: -0.2px; }
         .col-sub { font-size: 11px; color: var(--text-sub); margin-top: 2px; }
 
-        /* --- LOADING OVERLAY (Original Fleur-de-lis) --- */
+        /* --- LOADING OVERLAY --- */
         #loading-overlay {
             position: fixed;
             inset: 0;
-            z-index: 2147483647; /* Top priority */
+            z-index: 2147483647;
             background: var(--load-bg);
             display: flex;
             justify-content: center;
@@ -574,7 +598,7 @@
         }
 
         .loader-text {
-            font-family: 'Great Vibes', cursive;
+            font-family: 'Sora', cursive;
             font-size: 24px;
             color: var(--load-color);
             letter-spacing: 1px;
@@ -628,7 +652,7 @@
         }
         .seasonal-card .seasonal-icon { font-size: 22px; color: var(--text-sub); transition: 0.5s; position: relative; z-index: 5; }
 
-        /* HOVER GLOW & SNOW */
+        /* HOVER GLOW */
         .seasonal-card:hover {
             background: linear-gradient(135deg, rgba(162, 217, 255, 0.1), rgba(162, 217, 255, 0.02));
             border-color: rgba(162, 217, 255, 0.4);
@@ -683,3 +707,21 @@
             z-index: 9980; opacity: 0; transition: opacity 2s ease; mix-blend-mode: screen; 
         }
         #snow-container.snowing { opacity: 1; }
+
+        /* VIEW TRANSITIONS */
+        .tab-view { display: none; }
+        .tab-view.active { display: block; }
+
+        /* Staggered Animations */
+        /* Increased duration to 0.8s for more drama */
+        .anim-enter { animation: fadeInUp 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
+        .anim-exit { animation: fadeOutDown 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeOutDown {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(30px); }
+        }
