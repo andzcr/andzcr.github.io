@@ -1,0 +1,703 @@
+/* --- RESET & VARS --- */
+:root {
+    --primary-bg: #000000;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --easing: cubic-bezier(0.76, 0, 0.24, 1);
+    --crimson: rgb(255, 0, 0); 
+    --premium-gradient: linear-gradient(-45deg, #191919, #ffffff);
+    --premium-gradient-two: linear-gradient(135deg, #ffffff, #2b2b2b);
+    --premium-solid: #ffffff; 
+    --border-gradient: linear-gradient(to right, black 0%, white 50%, black 100%);
+    --border-gradient-title: linear-gradient(to right, black 0%, rgb(84, 84, 84) 50%, black 100%);
+    --primary-font: #ffffff;
+    --accept: #2bff00;
+    --decline: #ff0000;
+    --primary-mask: black;
+    --secondary-mask: rgba(0, 0, 0, 0.156);
+    --secondary-font: white;
+    --primary-review: rgba(255, 255, 255, 0.096);
+    --secondary-review: rgb(0, 0, 0);
+    --review-font: rgb(255, 255, 255);
+    --footer-font: white;
+    --scrolling-bar: #ffffff; 
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+/* Aplică pentru tot site-ul */
+body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE10+/Edge */
+    user-select: none;         /* Standard */
+}
+
+/* Dacă vrei să permiți selectarea doar în anumite zone (ex: formulare) */
+input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+@font-face {
+    font-family: 'Sora';
+    src: url('https://andzcr.github.io/resources/fonts/PlayfairDisplay-Regular.ttf') format('truetype');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Great';
+    src: url('https://andzcr.github.io/resources/fonts/GreatVibes-Regular.ttf') format('truetype');
+    font-display: swap;
+}
+@font-face {
+    font-family: 'TitleFont';
+    src: url('https://andzcr.github.io/resources/fonts/Maves.ttf') format('truetype');
+    font-display: swap;
+}
+body { background: var(--dark-bg); font-family: 'Sora', sans-serif; overflow-x: hidden; background-color: black; }
+
+/* =========================================
+   CINEMATIC NAV SYSTEM (NEW)
+   ========================================= */
+.cinematic-nav {
+    position: absolute;
+    top: 40px;
+    left: 16%;
+    z-index: 10001;
+    display: block;
+}
+
+.nav-list-cine {
+    list-style: none;
+    display: flex;
+    gap: 10px; /* Spatiu generos */
+    padding: 0;
+    margin: 0;
+}
+
+.cine-link {
+    text-decoration: none;
+    color: #000000; /* Alb pentru contrast pe negru */
+    font-family: 'Sora', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px; 
+    min-width: 80px;
+    cursor: pointer;
+    
+    /* Animation Init State */
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: cineFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Staggered Delay for Dramatic Fade In */
+.nav-list-cine li:nth-child(1) .cine-link { animation-delay: 0.2s; }
+.nav-list-cine li:nth-child(2) .cine-link { animation-delay: 0.4s; }
+.nav-list-cine li:nth-child(3) .cine-link { animation-delay: 0.6s; }
+.nav-list-cine li:nth-child(4) .cine-link { animation-delay: 0.8s; }
+.nav-list-cine li:nth-child(5) .cine-link { animation-delay: 1.0s; }
+.nav-list-cine li:nth-child(6) .cine-link { animation-delay: 1.2s; }
+
+@keyframes cineFadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- HOVER TRANSFORMATION (Text -> Icon) --- */
+.cine-link .text-label {
+    display: block;
+    position: absolute;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    opacity: 1;
+    transform: scale(1);
+}
+
+.cine-link ion-icon {
+    font-size: 1.4rem;
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: absolute;
+}
+
+/* Hover States */
+.cine-link:hover .text-label {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.cine-link:hover ion-icon {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+/* --- MOBILE HIDDEN --- */
+@media screen and (max-width: 1024px) {
+    .cinematic-nav { display: none !important; }
+}
+
+
+/* =========================================
+   REMOVED OLD STICKY NAV CSS
+   ========================================= */
+/* Deoarece am inlocuit sistemul vechi, am comentat stilurile vechi care nu mai sunt necesare.
+   Burger-ul ramane doar pentru functionalitatea overlay-ului daca este necesar pe mobile
+   dar meniul stick-y este scos.
+*/
+
+/* =========================================
+   BURGER MENU (MAIN) - DESIGN & POSITIONING
+   ========================================= */
+
+.hamburger {
+    position: fixed; 
+    top: 50px; 
+    right: 50px; 
+    left: auto;
+    height: 50px;
+    width: auto; 
+    z-index: 10000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-direction: row-reverse;
+    opacity: 0;               /* Start invizibil */
+    animation: fadeIn 4s ease forwards; /* Fade-in 3.2s */
+
+    /* Tranzitie deja existentă pentru alte efecte */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+
+    pointer-events: all;
+}
+
+/* Definirea animatiei */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Clasa adaugata cand dam scroll in jos (Ascunde Burgerul) */
+.hamburger.burger-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+    animation: none !important;  /* <— FIX CRUCIAL */
+}
+
+.hamburger.active {
+    right: auto;
+    left: 30px;
+    flex-direction: row; 
+    
+    /* Cand meniul e deschis, burgerul TREBUIE sa fie vizibil indiferent de scroll */
+    opacity: 1 !important;
+    pointer-events: all !important;
+    transform: translateY(0) !important;
+}
+
+/* SVG STYLES */
+.hamburger svg {
+    height: 50px;
+    width: 50px;
+    transition: transform 0.5s var(--easing);
+}
+
+.line {
+    fill: none;
+    stroke: var(--primary-bg); 
+    stroke-width: 6px;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.5s, stroke-dashoffset 0.5s, transform 0.5s, stroke 0.5s;
+}
+
+.lineTop { stroke-dasharray: 40 40; stroke-dashoffset: 25; transform-origin: center; }
+.lineBottom { stroke-dasharray: 40 40; stroke-dashoffset: -25; transform-origin: center; }
+.lineMid { stroke-dasharray: 40 40; stroke-dashoffset: 0; }
+
+/* ANIMATIE X (ACTIVE) */
+.hamburger.active svg .line { stroke: var(--secondary-font); } 
+
+.hamburger.active svg .lineTop {
+    stroke-dashoffset: 0; 
+    transform: translate(0px, 18px) rotate(45deg);
+}
+.hamburger.active svg .lineMid { stroke-dashoffset: 40; opacity: 0; }
+.hamburger.active svg .lineBottom {
+    stroke-dashoffset: 0;
+    transform: translate(0px, -10px) rotate(-45deg);
+}
+
+/* GLOW PULSE */
+@keyframes glow-white {
+    0% { filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0)); }
+    50% { 
+        filter: 
+            drop-shadow(0 0 5px rgba(255, 255, 255, 1))
+            drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)); 
+    }
+    100% { filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0)); }
+}
+@keyframes glow-red {
+    0% { filter: drop-shadow(0 0 0 rgba(255, 0, 0, 0)); }
+    50% { 
+        filter: 
+            drop-shadow(0 0 5px rgb(255, 255, 255))
+            drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)); 
+    }
+    100% { filter: drop-shadow(0 0 0 rgba(255, 0, 0, 0)); }
+}
+
+.hamburger:not(.active):hover svg { animation: glow-white 2s infinite; }
+.hamburger.active:hover svg { animation: glow-red 2s infinite; }
+
+/* LABEL STYLING */
+.burger-label {
+    font-size: 10px; font-weight: 700; color: var(--secondary-font); letter-spacing: 2px;
+    opacity: 0; 
+    transition: all 0.6s var(--easing); pointer-events: none;
+}
+.hamburger:not(.active) .burger-label { transform: translateX(30px); }
+.hamburger:not(.active):hover .burger-label { opacity: 1; transform: translateX(0px); }
+.hamburger.active .burger-label { transform: translateX(-30px); }
+.hamburger.active:hover .burger-label { opacity: 1; transform: translateX(-10px); }
+
+
+/* =========================================
+   NAV OVERLAY
+   ========================================= */
+.nav-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: var(--dark-bg); z-index: 9990;
+    transform: translateX(-100%); transition: transform 0.8s var(--easing);
+    display: flex;
+}
+.nav-overlay.open { transform: translateX(0); }
+
+.nav-bg-texture {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none; opacity: 0.3; z-index: 0;
+}
+
+.split-layout { display: flex; width: 100%; height: 100%; z-index: 1;}
+
+/* === LEFT COLUMN (30%) === */
+.nav-left {
+    width: 30%; height: 100%;
+    border-style: solid;
+    border-width: 0 1px 0 0;
+    border-image: var(--border-gradient) 1;
+    padding: 100px 60px 60px 60px; 
+    display: flex; flex-direction: column; justify-content: space-between;
+    background: rgb(0, 0, 0); backdrop-filter: blur(10px);
+}
+.nav-header .nav-subtitle { font-size: 12px; text-transform: uppercase; letter-spacing: 25px; color: var(--secondary-font); display: block; margin-bottom: 10px; position: absolute; top: 155px; left: 16.5%;}
+.nav-header .nav-title { font-size: 3rem;     background: var(--premium-gradient); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 100; margin: 0; font-family: 'Great', cursive; position: absolute; top: 80px; left: 35%; }
+
+/* MENU LIST */
+.menu-list { 
+    margin-top: 80px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0; 
+    border-style: solid;
+    border-width: 1px 0 0 0;
+    border-image: var(--border-gradient-title) 1;
+}
+.menu-list:hover .menu-item { opacity: 0.3; filter: blur(1px); } 
+.menu-list .menu-item:hover, .menu-list .menu-item.active { opacity: 1; filter: blur(0); }
+
+.menu-item { 
+    position: relative; 
+    border: none;
+    transition: all 0.4s ease; 
+}
+.menu-item:last-child { border: none; }
+
+.menu-link { display: flex; align-items: center; padding: 25px 0; cursor: pointer; color: var(--secondary-font); transition: all 0.4s ease; text-decoration: none; }
+.item-number { font-size: 0.9rem; margin-right: 20px; font-family: monospace; opacity: 0.5; }
+
+/* --- GRADIENT TEXT ON HOVER --- */
+.menu-item:hover .item-name,
+.menu-item.active .item-name,
+.menu-item:hover .item-number,
+.menu-item.active .item-number {
+    background: var(--secondary-font);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 1;
+}
+
+/* UNDERLINE ANIMATION (Left -> Right) */
+.item-name { font-size: 1.5rem; font-weight: 500; position: relative; display: inline-block; color: var(--secondary-font); letter-spacing: 2px; }
+.item-name::after {
+    content: ''; position: absolute; bottom: -5px; left: 0;
+    width: 100%; height: 0.5px; 
+    background: var(--border-gradient);
+    transform: scaleX(0); transform-origin: right; transition: transform 0.4s var(--easing);
+}
+.menu-item:hover .item-name::after, .menu-item.active .item-name::after {
+    transform: scaleX(1); transform-origin: left;
+}
+
+.mobile-arrow { display: none; margin-left: auto; transition: transform 0.3s; }
+.mobile-dropdown { display: none; }
+
+.nav-footer {
+    display: flex; align-items: center; gap: 50px;
+    color: var(--text-muted); font-size: 0.9rem; padding-top: 30px; 
+    border-style: solid;
+    border-width: 1px 0 0 0;
+    border-image: var(--border-gradient-title) 1;
+}
+.connect-text { font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-size: 0.8rem; margin-left: 15px; color: var(--secondary-font); }
+.social-icons-premium { display: flex; gap: 15px; }
+.social-icons-premium a {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--secondary-font); font-size: 1.5rem; transition: 0.3s; opacity: 0.7;
+}
+.social-icons-premium a:hover { opacity: 1; color: var(--premium-solid); transform: translateY(-3px) scale(1.1); }
+
+
+/* === RIGHT COLUMN (70%) === */
+.nav-right { width: 70%; height: 100%; position: relative; overflow: hidden; background-color: #000;}
+
+/* REPARATIE: Prefix adaugat (nav-) pentru a nu se bate cu Reviews */
+.nav-preview-card {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0; visibility: hidden; transition: opacity 0.6s ease, visibility 0.6s;
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 80px 100px;
+}
+.nav-preview-card.active { opacity: 1; visibility: visible; z-index: 2; }
+
+.nav-preview-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+.nav-preview-bg img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.1); transition: transform 6s ease; }
+.nav-preview-card.active .nav-preview-bg img { transform: scale(1); }
+
+/* MASK (STANGA -> DREAPTA + JOS) */
+.overlay-gradient {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+    background: 
+        linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0) 100%),
+        linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 100%);
+    pointer-events: none;
+}
+
+.nav-preview-content {
+    display: flex; flex-direction: column; align-items: center; text-align: center; width: 100%;
+    transform: translateY(30px); opacity: 0; transition: all 0.6s 0.2s var(--easing); position: relative; z-index: 2;
+}
+.nav-preview-card.active .nav-preview-content { transform: translateY(0); opacity: 1; }
+
+.nav-preview-desc { 
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--secondary-font);
+    line-height: 1.7;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 20px; /* schimbat */
+    letter-spacing: 1px;
+    margin-left: -80px; /* schimbat */
+}
+
+.nav-preview-tags { 
+    display: flex;
+    gap: 20px;
+    margin-bottom: -20px;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* sau center */
+    width: 100%;
+    margin-left: 240px;
+    max-width: 600px;
+}
+
+.nav-preview-tags span {
+    font-size: 0.95rem; color: var(--secondary-font); font-weight: 500; letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 8px;
+}
+.nav-preview-tags span::before {
+    content: '✓';
+    background: var(--premium-gradient);    
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    font-size: 1.2rem; line-height: 1;
+}
+
+/* === MOBILE LAYOUT (< 1024px) === */
+@media screen and (max-width: 1024px) {
+    .hamburger { top: 40px; right: 20px; left: auto; }
+    .hamburger.active { left: 0px; top: 10px; } 
+    
+    .nav-overlay { transform: translateX(0); opacity: 0; visibility: hidden; transition: 0.4s; }
+    .nav-overlay.open { opacity: 1; visibility: visible; }
+    .split-layout { display: block; } .nav-right { display: none; }
+    
+    .nav-left { width: 100%; padding: 80px 30px 40px 30px; border: none; }
+    
+    .menu-list:hover .menu-item { opacity: 1; filter: none; }
+    .menu-item { opacity: 1 !important; filter: none !important; }
+    .menu-link { padding: 20px 0; }
+    
+    .mobile-dropdown { max-height: 0; overflow: hidden; opacity: 0; transition: 0.4s; }
+    .menu-item.mobile-active .mobile-dropdown { display: block; max-height: 300px; opacity: 1; padding-bottom: 30px; }
+    
+    .mobile-btn { display: inline-block; position: relative; padding-bottom: 8px; width: 100%; color: var(--secondary-font); text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+    .mobile-btn::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100px; height: 2px; background: var(--secondary-font); transition: 0.3s; }
+    .mobile-btn:hover::after { width: 100%; background: var(--premium-solid); }
+    .nav-footer { flex-direction: column; align-items: flex-start; gap: 15px; }
+    
+    /* Pe mobil, de obicei sticky-nav este mai mic sau ascuns, dar il lasam activ pentru consistenta */
+    /* .sticky-nav { width: 95%; height: 50px; } - REMOVED OLD */
+    /* ASCUNDEM BUTONUL CREATIV PE ECRANE MICI PENTRU A NU STRICA LAYOUT-UL COMPACT */
+    .button-creative { display: none; }
+}
+.hamburger {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity .5s ease, transform .5s ease;
+}
+
+/* când trebuie să dispară */
+.hamburger.burger-hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    animation: none !important; /* OBLIGATORIU — oprește fadeIn-ul tău */
+}
+body {
+  background-color: var(--primary-bg);
+  margin: 0; /* ca să nu rămână spațiu gri pe margini */
+}
+
+@media (max-width: 768px) { 
+    .hamburger {
+        top: 35px;
+        right: 20px;
+    }
+    .hamburger.active { left: 0px; top: 10px; } 
+    
+    .nav-overlay { transform: translateX(0); opacity: 0; visibility: hidden; transition: 0.4s; }
+    .nav-overlay.open { opacity: 1; visibility: visible; }
+    .nav-left .nav-subtitle { left: 50px; }
+    .split-layout { display: block; } .nav-right { display: none; }
+    
+    .nav-left { width: 100%; padding: 8px 30px 40px 30px; margin-top: 50px; border: none; }
+    
+    .menu-list:hover .menu-item { opacity: 1; filter: none; }
+    .menu-item { opacity: 1 !important; filter: none !important; }
+    .menu-link { padding: 20px 0; }
+    
+    .mobile-dropdown { max-height: 0; overflow: hidden; opacity: 0; transition: 0.4s; }
+    .menu-item.mobile-active .mobile-dropdown { display: block; max-height: 300px; opacity: 1; padding-bottom: 30px; }
+    
+    .mobile-btn { display: inline-block; position: relative; padding-bottom: 8px; width: 100%; color: var(--secondary-font); text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+    .mobile-btn::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100px; height: 2px; background: var(--secondary-font); transition: 0.3s; }
+    .mobile-btn:hover::after { width: 100%; background: var(--premium-solid); }
+    .nav-footer { flex-direction: column; align-items: center; gap: 15px; position: relative; top: -100px;}
+    
+    /* Pe mobil, de obicei sticky-nav este mai mic sau ascuns, dar il lasam activ pentru consistenta */
+    /* .sticky-nav { width: 95%; height: 50px; } - REMOVED OLD */
+    /* ASCUNDEM BUTONUL CREATIV PE ECRANE MICI PENTRU A NU STRICA LAYOUT-UL COMPACT */
+    .button-creative { display: none; }
+}
+/* =========================================
+   PREMIUM COOKIE NOTIFICATION (STABLE LAYOUT)
+   ========================================= */
+.cookie-notification {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 150%); /* Ascuns jos */
+    width: 90%;
+    max-width: 900px;
+    z-index: 11000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.cookie-notification.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.cookie-notification.hide-out {
+    opacity: 0;
+    transform: translate(-50%, 150%);
+    pointer-events: none;
+    transition: all 0.6s ease;
+}
+
+/* Glass Background */
+.cookie-notification .cookie-content {
+    background: var(--primary-bg); /* Dark Glass */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 20px 30px;
+    box-shadow: 0 0px 40px rgba(255, 255, 255, 0.138), 0 0 0 1px rgba(0,0,0,0.2);
+    
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between nu mai e critic aici, folosim flex-grow */
+    gap: 10px; 
+}
+
+/* --- ZONA TEXT (STANGA) --- */
+.cookie-left {
+    flex: 1; /* Ocupă tot spațiul disponibil */
+    /* Nu se va mai micșora brusc pentru că dreapta are dimensiune fixă acum */
+}
+
+.cookie-text {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.9rem;
+    color: var(--secondary-font);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.cookie-learn-more {
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 5px;
+    font-size: 0.9rem;
+    position: relative;
+    display: inline-block;
+    background: var(--premium-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s;
+}
+.cookie-learn-more:hover { transform: translateY(-1px); cursor: pointer; }
+.cookie-learn-more::after {
+    content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 1px;
+    background: var(--premium-gradient); transition: width 0.3s ease;
+}
+.cookie-learn-more:hover::after { width: 100%; }
+
+/* --- ZONA BUTOANE (DREAPTA - FIXATA) --- */
+.cookie-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Aliniem butoanele la dreapta în spațiul rezervat */
+    gap: 15px;
+    
+    /* TRUCUL MAGIC: Rezervăm spațiu suficient pentru animație */
+    /* 120px (hover) + 44px (normal) + 15px (gap) ~ 180px */
+    min-width: 190px; 
+    flex-shrink: 0; /* Nu lăsăm containerul să fie strivit */
+}
+
+/* --- BUTOANE (Revenire la versiunea anterioară) --- */
+.cookie-btn {
+    background: var(--primary-bg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrat default */
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    color: var(--secondary-font);
+    padding: 0; /* Fără padding dubios */
+}
+
+.cookie-btn .icon-container {
+    font-size: 1.3rem;
+    min-width: 44px; /* Iconița are spațiul ei */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s; /* Se poate mișca puțin */
+}
+
+.cookie-btn .btn-text {
+    opacity: 0;
+    width: 0;
+    white-space: nowrap;
+    font-family: 'Sora', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    transform: translateX(10px); /* Vine din dreapta (slide) */
+    transition: all 0.3s ease;
+}
+
+/* --- HOVER EFFECTS --- */
+.cookie-btn:hover {
+    width: 120px;
+    border-radius: 30px;
+    background: var(--secondary-font);
+    padding-right: 15px; /* Spațiu în dreapta pentru text */
+}
+
+.cookie-btn:hover .btn-text {
+    opacity: 1;
+    width: auto;
+    transform: translateX(0); /* Slide la loc */
+}
+
+/* Accept Style */
+.btn-accept:hover {
+    border-color: rgba(46, 204, 113, 0.5);
+    background: rgba(46, 204, 113, 0.1);
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.15);
+}
+.btn-accept:hover .icon-container, 
+.btn-accept:hover .btn-text { color: var(--accept); }
+
+/* Refuse Style */
+.btn-refuse:hover {
+    border-color: rgba(231, 76, 60, 0.5);
+    background: rgba(231, 76, 60, 0.1);
+    box-shadow: 0 0 20px rgba(231, 76, 60, 0.15);
+}
+.btn-refuse:hover .icon-container, 
+.btn-refuse:hover .btn-text { color: var(--decline);; }
+
+/* --- MOBILE HIDDEN --- */
+@media screen and (max-width: 768px) {
+    .cookie-notification {
+        display: none !important;
+    }
+
+    .hamburger {
+        color: black;
+    }
+}
+/* Container progress bar */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: transparent;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Progress fill */
+#scroll-progress span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--scrolling-bar);
+  transition: width 0.15s linear;
+}
