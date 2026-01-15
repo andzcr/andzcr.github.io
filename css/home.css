@@ -563,7 +563,7 @@
 
             /* Activ doar effect.jpg */
             .bg-base { 
-                background-image: url('https://andzcr.github.io/resources/photos/effect.jpg') !important;
+                background-image: url('https://andzcr.github.io/resources/photos/effect.png') !important;
                 background-size: cover; 
                 /* Resetam pozitia la center (nu 100% bottom) pentru a evita efectul de "prea aproape" */
                 background-position: center center; 

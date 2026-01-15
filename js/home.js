@@ -102,7 +102,7 @@
                 this.ctx = this.canvas.getContext('2d', { willReadFrequently: false });
                 this.bgImage = new Image();
                 this.bgImage.crossOrigin = "Anonymous";
-                this.bgImage.src = 'https://andzcr.github.io/resources/photos/effect.jpg';
+                this.bgImage.src = 'https://andzcr.github.io/resources/photos/effect.png';
 
                 this.points = [];
                 this.maxAge = 120;

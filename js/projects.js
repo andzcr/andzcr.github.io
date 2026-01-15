@@ -6,7 +6,7 @@ const PROJECTS_DATA = {
       description: 'Personal template for the CORELLE brand, category: nail products. It is a fully responsive website, optimized for both mobile and desktop. It includes systems such as Register, Login, Reviews, Favourites, History, and an Order System.',
       features: ['Advanced User Registration System', 'Interactive Review & Rating System', 'Real-time Chat Functionality', 'Payment Integration System', 'Advanced Analytics Dashboard'],
       images: [
-        'https://andzcr.github.io/resources/videos/home_land.mp4',
+        'https://andzcr.github.io/resources/projects/corelle/home_land.mp4',
         'https://res.cloudinary.com/df9syoltz/video/upload/v1764524717/1130_1_2_ptidlk.mp4',
         'https://andzcr.github.io/resources/projects/corelle/poza3.png',
         'https://andzcr.github.io/resources/projects/corelle/poza4.png',
@@ -18,7 +18,7 @@ const PROJECTS_DATA = {
         'https://andzcr.github.io/resources/projects/corelle/poza10.png',
         'https://andzcr.github.io/resources/projects/corelle/poza11.png'
       ],
-      thumbnail: 'https://andzcr.github.io/resources/videos/home_land.mp4',
+      thumbnail: 'https://andzcr.github.io/resources/projects/corelle/home_land.mp4',
       isVideoThumbnail: true
     },
     {
@@ -26,8 +26,8 @@ const PROJECTS_DATA = {
       name: 'Website Template 2',
       description: 'A modern portfolio website showcasing creative work with smooth animations and interactive elements to engage visitors.',
       features: ['Smooth Scroll Animations', 'Interactive Gallery', 'Contact Form with Validation', 'Responsive Design', 'SEO Optimization'],
-      images: Array(3).fill('https://andz7z.github.io/assets/photos/altele/project_one.jpg'),
-      thumbnail: 'https://andz7z.github.io/assets/photos/altele/project_one.jpg',
+      images: Array(3).fill('https://andzcr.github.io/assets/photos/altele/project_one.jpg'),
+      thumbnail: 'https://andzcr.github.io/assets/photos/altele/project_one.jpg',
       isVideoThumbnail: false
     },
     {
@@ -35,8 +35,8 @@ const PROJECTS_DATA = {
       name: 'Website Template 3',
       description: 'A comprehensive business dashboard with real-time data visualization and reporting tools for informed decision-making.',
       features: ['Real-time Data Visualization', 'Custom Reporting Tools', 'User Management System', 'Data Export Functionality', 'Multi-level Access Control'],
-      images: Array(3).fill('https://andz7z.github.io/assets/photos/altele/project_two.jpg'),
-      thumbnail: 'https://andz7z.github.io/assets/photos/altele/project_two.jpg',
+      images: Array(3).fill('https://andzcr.github.io/assets/photos/altele/project_two.jpg'),
+      thumbnail: 'https://andzcr.github.io/assets/photos/altele/project_two.jpg',
       isVideoThumbnail: false
     },
     {
@@ -44,8 +44,8 @@ const PROJECTS_DATA = {
       name: 'Website Template 4',
       description: 'A user-friendly mobile banking application with intuitive navigation and secure transaction features.',
       features: ['Intuitive Navigation Design', 'Secure Transaction Flow', 'Biometric Authentication', 'Personalized Dashboard', 'Bill Payment System'],
-      images: Array(3).fill('https://andz7z.github.io/assets/photos/altele/project_three.jpg'),
-      thumbnail: 'https://andz7z.github.io/assets/photos/altele/project_three.jpg',
+      images: Array(3).fill('https://andzcr.github.io/assets/photos/altele/project_three.jpg'),
+      thumbnail: 'https://andzcr.github.io/assets/photos/altele/project_three.jpg',
       isVideoThumbnail: false
     },
     {
@@ -53,8 +53,8 @@ const PROJECTS_DATA = {
       name: 'Website Template 5',
       description: 'A comprehensive fitness tracking application with personalized workout plans and progress monitoring features.',
       features: ['Personalized Workout Plans', 'Progress Tracking Dashboard', 'Social Sharing Features', 'Nutrition Tracking', 'Goal Setting System'],
-      images: Array(3).fill('https://andz7z.github.io/assets/photos/altele/project_four.jpg'),
-      thumbnail: 'https://andz7z.github.io/assets/photos/altele/project_four.jpg',
+      images: Array(3).fill('https://andzcr.github.io/assets/photos/altele/project_four.jpg'),
+      thumbnail: 'https://andzcr.github.io/assets/photos/altele/project_four.jpg',
       isVideoThumbnail: false
     },
     {
@@ -62,8 +62,8 @@ const PROJECTS_DATA = {
       name: 'Website Template 6',
       description: 'An intuitive travel booking platform with seamless booking flow and personalized recommendations for travelers.',
       features: ['Seamless Booking Flow', 'Personalized Recommendations', 'Interactive Maps Integration', 'Review & Rating System', 'Multi-language Support'],
-      images: Array(3).fill('https://andz7z.github.io/assets/photos/altele/project_five.jpg'),
-      thumbnail: 'https://andz7z.github.io/assets/photos/altele/project_five.jpg',
+      images: Array(3).fill('https://andzcr.github.io/assets/photos/altele/project_five.jpg'),
+      thumbnail: 'https://andzcr.github.io/assets/photos/altele/project_five.jpg',
       isVideoThumbnail: false
     }
   ]
