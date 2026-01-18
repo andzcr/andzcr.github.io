@@ -240,7 +240,7 @@ const initStickyNav = () => {
 
 // Helper Scripts
 document.addEventListener('DOMContentLoaded', function() {
-    const mesaje = [ "‎ ‎∀ N D Z | PORTFOLIO", "‎ ‎ MADE TO PERFORM", "‎ ‎∀ N D Z | PORTFOLIO", "‎ ‎ ‎ ‎ ‎ ‎UI / UX | DESIGN" ];
+    const mesaje = [ "‎ ‎ANDZ.ro | Studio", "‎ ‎ ‎ ‎MADE TO PERFORM", "‎ ‎ANDZ.ro | Studio", "‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎BRAND DESIGN" ];
     const spatiereCentrare = "          "; 
     let mesajIndex = 0, charIndex = 0, seSterge = false;
     function esteMobil() { return (window.innerWidth < 768) || /Android|webOS|iPhone/i.test(navigator.userAgent); }

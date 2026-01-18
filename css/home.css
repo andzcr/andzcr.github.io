@@ -277,12 +277,12 @@
         .vision-top {
             font-size: 1rem;
             font-weight: 100;
-            letter-spacing: 6px;
+            letter-spacing: 3px;
             margin-bottom: 0px;
             font-family: 'Sora', sans-serif;
             color: black;
             text-align: left;
-            margin-left: 5px; 
+            margin-left: 9px; 
         }
 
         /* --- UPDATED VISION ROW FOR VERTICAL STACK --- */
@@ -316,7 +316,7 @@
             font-size: 4rem;
             padding-left: 5px;
             position: relative;
-            left: -10px;
+            left: -15px;
             top: 0px; /* Adjusted top */
         }
 
@@ -429,7 +429,7 @@
         .magnetic-glow {
             position: absolute;
             inset: -30px;
-            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4), transparent 70%);
+            background: radial-gradient(circle at center, rgb(0, 0, 0), transparent 70%);
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: -1;
