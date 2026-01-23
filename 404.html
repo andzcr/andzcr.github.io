@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | ANDZ</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --cursor-x: 50%; 
+            --cursor-y: 50%; 
+            --premium-gradient: linear-gradient(135deg, #ffffff, #127d8d);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: default;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            font-family: 'Sora', sans-serif;
+            color: var(--text-color);
+            overflow: hidden;
+        }
+
+        header {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            right: 40px; 
+            z-index: 10;
+            opacity: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            pointer-events: none;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            pointer-events: auto;
+            text-decoration: none;
+            border-radius: 50px;
+            background: transparent;
+        }
+
+        .logo-symbol {
+            font-size: 32px; 
+            font-family: 'Great', sans-serif; 
+            color: #ffffff;
+            z-index: 2;
+        }
+
+        .logo-wrapper:hover .logo-symbol {
+            opacity: 1; 
+        }
+
+        .header-stats {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 15px;
+            pointer-events: auto;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            line-height: 1.2;
+        }
+
+        .stat-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: var(--premium-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Sora', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+            white-space: nowrap;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9)); 
+                transform: scale(1.15); 
+            }
+            100% {
+                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1));
+                transform: scale(1);
+            }
+        }
+
+        .top-return-btn {
+            pointer-events: auto;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 28px;
+            background: transparent;
+            border: none;
+            text-decoration: none;
+            animation: pulseGlow 4s infinite ease-in-out;
+        }
+
+        .top-return-btn:hover {
+            animation: none;
+            color: #ffffff;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,1));
+            transform: scale(1.2); 
+        }
+
+        .ghost-text-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .ghost-text {
+            font-size: clamp(8rem, 25vw, 30rem);
+            font-weight: 800;
+            line-height: 0.8;
+            letter-spacing: -10px;
+            user-select: none;
+            pointer-events: auto;
+            
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.03);
+            
+            background-image: radial-gradient(
+                circle 600px at var(--cursor-x) var(--cursor-y),
+                rgba(255, 255, 255, 1) 0%,
+                rgba(255, 255, 255, 0.3) 25%,
+                rgba(255, 255, 255, 0.02) 55%,
+                transparent 70%
+            );
+            
+            -webkit-background-clip: text;
+            background-clip: text;
+            
+            will-change: background-image;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .ghost-message-container {
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Sora', sans-serif;
+            opacity: 0;
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-shadow: 0 0 40px rgba(255,255,255,0.1);
+        }
+
+        .changing-word {
+            color: #fff;
+            font-weight: 800;
+            background: var(--premium-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            min-width: 100px;
+            position: relative;
+        }
+
+        .bottom-ui {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 10;
+        }
+
+        .nav-suggestions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            opacity: 0;
+        }
+
+        .suggestion-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .links-wrapper { display: flex; gap: 30px; }
+
+        .nav-link {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            position: relative;
+            padding-bottom: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--premium-gradient); 
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .nav-link:hover {
+            background: var(--premium-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 20px;
+            opacity: 0; 
+        }
+
+        .animated-border-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.02);
+            overflow: visible;
+        }
+        
+        .rating-badge {
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            color: #ccc;
+        }
+
+        .border-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        .border-rect {
+            fill: none;
+            stroke: url(#gradientStroke);
+            stroke-width: 1.5;
+            stroke-dasharray: 0; 
+            stroke-dashoffset: 0;
+            stroke-linecap: round;
+            opacity: 0.6;
+        }
+
+        @keyframes borderSmoothLoop {
+            0% {
+                stroke-dashoffset: var(--length); 
+                opacity: 0;
+            }
+            15% {
+                opacity: 1; 
+            }
+            35% {
+                stroke-dashoffset: 0; 
+            }
+            65% {
+                stroke-dashoffset: 0; 
+            }
+            90% {
+                stroke-dashoffset: calc(var(--length) * -1); 
+                opacity: 1;
+            }
+            100% {
+                stroke-dashoffset: calc(var(--length) * -1);
+                opacity: 0; 
+            }
+        }
+
+        .rating-badge .border-rect {
+            opacity: 0;
+            animation: borderSmoothLoop 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+        }
+
+        .logo-wrapper .border-rect {
+            transition: stroke-dashoffset 0.6s ease-out;
+            opacity: 0.6;
+        }
+
+        @media (min-width: 769px) {
+            .logo-wrapper:hover .border-rect {
+                opacity: 1;
+                stroke-dashoffset: 0 !important;
+            }
+        }
+        
+        .star { color: #fff; font-size: 14px; }
+        .score { color: #fff; font-weight: 700; }
+
+        .socials { display: flex; gap: 20px; }
+
+        .social-link {
+            color: #666;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            header { 
+                top: 20px; left: 20px; right: 20px;
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: row;
+            }
+            
+            .top-return-btn { 
+                display: flex; 
+                width: 40px; 
+                height: 40px; 
+                font-size: 24px;
+                order: 1;
+                position: relative;
+                z-index: 20;
+            }
+
+            .logo-wrapper { 
+                display: none;
+            }
+
+            .header-stats {
+                position: absolute;
+                left: 55%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 20px;
+                order: 2;
+                width: auto;
+            }
+
+            .stat-item {
+                align-items: center; 
+            }
+            
+            .stat-number { font-size: 0.75rem; }
+            .stat-label { font-size: 0.45rem; letter-spacing: 0.5px; }
+
+            .ghost-text {
+                font-size: 40vw; 
+                background-image: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.02) 100%);
+                -webkit-text-stroke: 0;
+            }
+            
+            .ghost-message-container {
+                font-size: 1.5rem;
+                font-weight: 400;
+                flex-direction: column;
+                gap: 10px;
+                text-shadow: none;
+                text-align: center;
+                margin-top: 60px; 
+            }
+
+            .changing-word {
+                font-size: 3.5rem;
+                line-height: 1.1;
+                display: block;
+                margin-top: 5px;
+            }
+
+            .nav-suggestions { display: none; }
+            
+            .bottom-ui {
+                justify-content: center;
+                bottom: 30px;
+            }
+            .footer-actions {
+                align-items: center;
+                flex-direction: column-reverse; 
+                gap: 20px;
+                width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <linearGradient id="gradientStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#127d8d;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <header>
+        <a href="/" class="logo-wrapper animated-border-wrapper">
+            <svg class="border-svg">
+                <rect class="border-rect" x="1" y="1" width="96%" height="96%" rx="50" ry="50"></rect>
+            </svg>
+            <span class="logo-symbol">⚜</span>
+        </a>
+
+        <div class="header-stats">
+            <div class="stat-item">
+                <span class="stat-number"><span class="count-up" data-target="10">0</span>+</span>
+                <span class="stat-label">Happy Clients</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number"><span class="count-up" data-target="24">0</span>/7</span>
+                <span class="stat-label">Available</span>
+            </div>
+            <div class="stat-item mobile-hide-extra">
+                <span class="stat-number"><span class="count-up" data-target="100">0</span>%</span>
+                <span class="stat-label">Satisfaction</span>
+            </div>
+            <div class="stat-item mobile-hide-extra">
+                <span class="stat-number"><span class="count-up" data-target="50">0</span>+</span>
+                <span class="stat-label">Projects</span>
+            </div>
+        </div>
+
+        <a href="/" class="top-return-btn">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+        </a>
+    </header>
+
+    <div class="ghost-text-container">
+        <h1 class="ghost-text" id="ghost-text-el">404</h1>
+        <div class="ghost-message-container">
+            <span>Making websites with</span>
+            <span class="changing-word" id="word-rotator">passion</span>
+        </div>
+    </div>
+
+    <div class="bottom-ui">
+        <div class="nav-suggestions">
+            <div class="suggestion-label">Maybe you were looking for:</div>
+            <div class="links-wrapper">
+                <a href="/#home" class="nav-link">Home</a>
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#cv-section" class="nav-link">Skills</a>
+                <a href="/#projects" class="nav-link">Projects</a>
+                <a href="/#reviews" class="nav-link">Reviews</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+
+        <div class="footer-actions">
+            <div class="rating-badge animated-border-wrapper" id="ratingBadge">
+                <svg class="border-svg">
+                    <rect class="border-rect rating-border" x="1" y="1" width="98%" height="96%" rx="18" ry="18"></rect>
+                </svg>
+                
+                <ion-icon name="star" class="star"></ion-icon>
+                <span class="score">5.00</span>
+                <span>Avg Rating</span>
+            </div>
+
+            <div class="socials">
+                <a href="https://linkedin.com/in/lehadus-andrei-25a807372/" target="_blank" class="social-link"><ion-icon name="logo-linkedin"></ion-icon></a>
+                <a href="https://github.com/andzcr" target="_blank" class="social-link"><ion-icon name="logo-github"></ion-icon></a>
+                <a href="https://instagram.com/ndr.xc" target="_blank" class="social-link"><ion-icon name="logo-instagram"></ion-icon></a>
+                <a href="mailto:andz.contact@gmail.com" class="social-link"><ion-icon name="mail-outline"></ion-icon></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        function initAnimatedBorders() {
+            const rects = document.querySelectorAll('.border-rect');
+            
+            rects.forEach(rect => {
+                try {
+                    const bounds = rect.getBoundingClientRect();
+                    if (bounds.width === 0 || bounds.height === 0) return;
+
+                    const length = rect.getTotalLength();
+                    rect.style.strokeDasharray = `${length} ${length}`;
+                    rect.style.setProperty('--length', length);
+
+                    if (rect.closest('.logo-wrapper')) {
+                         rect.style.strokeDashoffset = length;
+                    }
+                    
+                    const wrapper = rect.closest('.animated-border-wrapper');
+                    if(wrapper && wrapper.classList.contains('logo-wrapper')) {
+                        wrapper.addEventListener('mouseenter', () => {
+                            rect.style.strokeDashoffset = '0';
+                        });
+                        wrapper.addEventListener('mouseleave', () => {
+                            rect.style.strokeDashoffset = length;
+                        });
+                    }
+                } catch (e) {
+                    console.log("SVG init error:", e);
+                }
+            });
+        }
+
+        function safeInitBorders() {
+             requestAnimationFrame(() => {
+                initAnimatedBorders();
+                setTimeout(initAnimatedBorders, 500);
+             });
+        }
+
+        const ghostText = document.getElementById('ghost-text-el');
+
+        function updateFlashlight(clientX, clientY) {
+            if (!ghostText) return;
+            const rect = ghostText.getBoundingClientRect();
+            const relX = clientX - rect.left;
+            const relY = clientY - rect.top;
+            
+            ghostText.style.setProperty('--cursor-x', relX + 'px');
+            ghostText.style.setProperty('--cursor-y', relY + 'px');
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            requestAnimationFrame(() => updateFlashlight(e.clientX, e.clientY));
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if(e.touches.length > 0) {
+                const touch = e.touches[0];
+                requestAnimationFrame(() => updateFlashlight(touch.clientX, touch.clientY));
+            }
+        }, { passive: true });
+
+        const words = ["passion", "vision", "dedication"];
+        let wordIndex = 0;
+        const wordElement = document.getElementById('word-rotator');
+
+        function rotateText() {
+            gsap.to(wordElement, {
+                opacity: 0,
+                y: -10,
+                duration: 0.5,
+                ease: "power2.in",
+                onComplete: () => {
+                    wordIndex = (wordIndex + 1) % words.length;
+                    wordElement.textContent = words[wordIndex];
+                    gsap.fromTo(wordElement, 
+                        { y: 10, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }
+                    );
+                }
+            });
+        }
+        setInterval(rotateText, 3000);
+
+        window.addEventListener("load", () => {
+            safeInitBorders();
+            
+            const tl = gsap.timeline();
+            tl.to("header", { opacity: 1, duration: 1, ease: "power2.out" })
+              .to(".ghost-text", { opacity: 1, duration: 1.5, ease: "power3.out" }, "-=0.5")
+              .to(".ghost-message-container", { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=1")
+              .to([".nav-suggestions", ".footer-actions"], { 
+                  opacity: 1, 
+                  y: 0, 
+                  stagger: 0.2, 
+                  duration: 1, 
+                  ease: "power2.out" 
+              }, "-=0.5");
+              
+            const stats = document.querySelectorAll('.count-up');
+            stats.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                gsap.to(stat, {
+                    innerHTML: target,
+                    duration: 2,
+                    ease: "power2.out",
+                    snap: { innerHTML: 1 },
+                    onUpdate: function() {
+                        this.targets()[0].innerHTML = Math.ceil(this.targets()[0].innerHTML);
+                    }
+                });
+            });
+
+            if(ghostText) {
+                const rect = ghostText.getBoundingClientRect();
+                updateFlashlight(rect.left + rect.width/2, rect.top + rect.height/2);
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

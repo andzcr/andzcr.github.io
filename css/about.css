@@ -1,0 +1,353 @@
+#about {
+  position: relative;
+  background: var(--primary-bg);
+  color: var(--primary-font);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Sora', sans-serif;
+  padding: 40px 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+  width: 100%;
+  max-width: 1400px;
+  height: 90vh;
+  align-items: center;
+}
+
+.about-left-ios {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 20px;
+}
+
+.ios-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  background: var(--premium-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.wave-emoji {
+  display: inline-block;
+  animation: wave 2.5s infinite;
+  transform-origin: 70% 70%;
+  -webkit-text-fill-color: initial;
+}
+
+.ios-description p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--primary-font);
+  max-width: 600px;
+  margin-bottom: 40px;
+  font-weight: 400;
+}
+
+.highlight-ios {
+  color: var(--primary-font);
+  font-weight: 600;
+}
+
+.ios-section {
+  margin-bottom: 30px;
+}
+
+.ios-subtitle {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.ios-card-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.ios-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.4s var(--easing), opacity 0.4s var(--easing), background-color 0.3s ease;
+  border-radius: 12px;
+}
+
+.ios-card:last-child {
+  border-bottom: none;
+}
+
+.ios-card-group:hover .ios-card {
+  opacity: 0.4;
+  transform: scale(0.98);
+}
+
+.ios-card-group .ios-card:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.03);
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border-bottom-color: transparent;
+}
+
+.ios-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.ios-card:hover .ios-icon-box {
+  transform: scale(1.1);
+}
+
+.ios-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ios-card-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.ios-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ios-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-font);
+}
+
+.ios-card-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-feature-settings: "tnum";
+}
+
+.ios-card-role {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+.about-right-ios {
+  height: 95%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.ios-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  cursor: default;
+}
+
+.ios-profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ios-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(20, 20, 20, 0);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 8px 16px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.4s var(--easing);
+  z-index: 5;
+}
+
+.ios-image-wrapper:hover .ios-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ios-hover-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 40%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.5s var(--easing);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.ios-image-wrapper:hover .ios-hover-overlay {
+  opacity: 1;
+}
+
+.ios-qualities-list {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 15px;
+  transform: translateY(20px);
+  transition: transform 0.5s var(--easing);
+  width: 100%;
+  justify-content: center;
+}
+
+.ios-image-wrapper:hover .ios-qualities-list {
+  transform: translateY(0);
+}
+
+.ios-quality-tag {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+  padding: 0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+.ios-quality-tag::before {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.apple-reveal {
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  transition: opacity 1s var(--easing), transform 1s var(--easing);
+}
+
+.apple-reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@media (max-width: 1024px) {
+  .about-container {
+    height: auto;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-left-ios {
+    order: 2;
+    padding-left: 0;
+  }
+
+  .about-right-ios {
+    order: 1;
+    height: 60vh;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .ios-image-wrapper {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  #about {
+    padding: 60px 20px;
+    height: auto;
+  }
+
+  .ios-title {
+    font-size: 2.2rem;
+  }
+
+  .ios-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .about-right-ios {
+    height: 50vh;
+  }
+
+  .ios-qualities-list {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 15px;
+  }
+}
