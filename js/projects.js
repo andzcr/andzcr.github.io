@@ -1,657 +1,287 @@
-const PROJECTS_DATA = {
-  'ui-ux-design': [
-    {
-      id: 1,
-      name: 'CORELLE | Nail Brand Template',
-      description: 'Personal template for the CORELLE brand, category: nail products. It is a fully responsive website, optimized for both mobile and desktop. It includes systems such as Register, Login, Reviews, Favourites, History, and an Order System.',
-      features: ['Advanced User Registration System', 'Interactive Review & Rating System', 'Real-time Chat Functionality', 'Payment Integration System', 'Advanced Analytics Dashboard'],
-      images: [
-        'https://andzcr.github.io/resources/projects/corelle/home_land.mp4',
-        'https://res.cloudinary.com/df9syoltz/video/upload/v1764524717/1130_1_2_ptidlk.mp4',
-        'https://andzcr.github.io/resources/projects/corelle/poza3.png',
-        'https://andzcr.github.io/resources/projects/corelle/poza4.png',
-        'https://andzcr.github.io/resources/projects/corelle/poza5.png',
-        'https://andzcr.github.io/resources/projects/corelle/poza6.png',
-        'https://andzcr.github.io/resources/projects/corelle/poza7.png',
-        'https://andzcr.github.io/resources/projects/corelle/poza8.png',
-        'https://andzcr.github.io/resources/projects/corelle/poza9.png',
-        'https://andzcr.github.io/resources/projects/corelle/poza10.png',
-        'https://andzcr.github.io/resources/projects/corelle/poza11.png'
-      ],
-      thumbnail: 'https://andzcr.github.io/resources/projects/corelle/home_land.mp4',
-      isVideoThumbnail: true
+const projectsData = {
+    corelle: {
+        title: "CORELLE | Nails Products Brand",
+        description: "Personal template for the CORELLE brand. It is a fully responsive website, optimized for both mobile and desktop. It includes systems such as Register, Login, Reviews, Favourites, History, and an Order System.",
+        media: [
+            { type: 'video', url: 'https://andzcr.github.io/resources/projects/corelle/home_land.mp4' },
+            { type: 'video', url: 'https://andzcr.github.io/resources/projects/corelle/best_seller.mp4' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/corelle/poza3.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/corelle/poza4.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/corelle/poza5.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/corelle/poza6.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/corelle/poza7.png' }
+        ]
     },
-    {
-      id: 2,
-      name: 'Website Template 2',
-      description: 'A modern portfolio website showcasing creative work with smooth animations and interactive elements to engage visitors.',
-      features: ['Smooth Scroll Animations', 'Interactive Gallery', 'Contact Form with Validation', 'Responsive Design', 'SEO Optimization'],
-      images: Array(3).fill('https://andzcr.github.io/assets/photos/altele/project_one.jpg'),
-      thumbnail: 'https://andzcr.github.io/assets/photos/altele/project_one.jpg',
-      isVideoThumbnail: false
-    },
-    {
-      id: 3,
-      name: 'Website Template 3',
-      description: 'A comprehensive business dashboard with real-time data visualization and reporting tools for informed decision-making.',
-      features: ['Real-time Data Visualization', 'Custom Reporting Tools', 'User Management System', 'Data Export Functionality', 'Multi-level Access Control'],
-      images: Array(3).fill('https://andzcr.github.io/assets/photos/altele/project_two.jpg'),
-      thumbnail: 'https://andzcr.github.io/assets/photos/altele/project_two.jpg',
-      isVideoThumbnail: false
-    },
-    {
-      id: 4,
-      name: 'Website Template 4',
-      description: 'A user-friendly mobile banking application with intuitive navigation and secure transaction features.',
-      features: ['Intuitive Navigation Design', 'Secure Transaction Flow', 'Biometric Authentication', 'Personalized Dashboard', 'Bill Payment System'],
-      images: Array(3).fill('https://andzcr.github.io/assets/photos/altele/project_three.jpg'),
-      thumbnail: 'https://andzcr.github.io/assets/photos/altele/project_three.jpg',
-      isVideoThumbnail: false
-    },
-    {
-      id: 5,
-      name: 'Website Template 5',
-      description: 'A comprehensive fitness tracking application with personalized workout plans and progress monitoring features.',
-      features: ['Personalized Workout Plans', 'Progress Tracking Dashboard', 'Social Sharing Features', 'Nutrition Tracking', 'Goal Setting System'],
-      images: Array(3).fill('https://andzcr.github.io/assets/photos/altele/project_four.jpg'),
-      thumbnail: 'https://andzcr.github.io/assets/photos/altele/project_four.jpg',
-      isVideoThumbnail: false
-    },
-    {
-      id: 6,
-      name: 'Website Template 6',
-      description: 'An intuitive travel booking platform with seamless booking flow and personalized recommendations for travelers.',
-      features: ['Seamless Booking Flow', 'Personalized Recommendations', 'Interactive Maps Integration', 'Review & Rating System', 'Multi-language Support'],
-      images: Array(3).fill('https://andzcr.github.io/assets/photos/altele/project_five.jpg'),
-      thumbnail: 'https://andzcr.github.io/assets/photos/altele/project_five.jpg',
-      isVideoThumbnail: false
+    bass: {
+        title: "Bass Industries",
+        description: "I am a fan of the TV series Gossip Girl, so I absolutely had to create a website concept for Chuck Bass - the owner of Bass Industries. This is a fictional concept, created for pleasure.",
+        media: [
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/bass/best_seller.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/bass/poza3.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/bass/poza4.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/bass/poza5.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/bass/poza6.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/bass/poza7.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/bass/poza8.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/bass/poza9.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/bass/poza10.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/bass/poza11.png' },
+            { type: 'image', url: 'https://andzcr.github.io/resources/projects/bass/poza12.png' }
+        ]
     }
-  ]
 };
 
-class ProjectManager {
-  constructor() {
-    this.dom = {
-      section: document.getElementById('projects'),
-      gallery: document.querySelector('.projects-gallery'),
-      modal: document.querySelector('.project-modal'),
-      modalContent: document.querySelector('.modal-content'),
-      slidesContainer: document.querySelector('.gallery-slides'),
-      related: document.querySelector('.related-projects'),
-      details: {
-        title: document.querySelector('.modal-title'),
-        name: document.querySelector('.project-name'),
-        desc: document.querySelector('.project-description p'),
-        features: document.querySelector('.key-features')
-      },
-      btns: {
-        cats: document.querySelectorAll('.category-btn'),
-        close: document.querySelector('.back-btn'),
-        contact: document.querySelector('.contact-btn'),
-        prev: document.querySelector('.prev-btn'),
-        next: document.querySelector('.next-btn')
-      }
-    };
+let currentSlideIndex = 0;
+let modalActiveProject = null;
+let modalLenis = null;
 
-    this.state = {
-      category: 'ui-ux-design',
-      idx: 0,
-      slideIdx: 0,
-      modalOpen: false,
-      animating: false,
-      typingTimeouts: [],
-      videoElements: new Map(),
-      isProjectActive: true,
-      galleryVideoObserver: null,
-      isChanging: false
-    };
+function initProjectModal() {
+    const cards = document.querySelectorAll('.work-card[data-project]');
+    const backBtn = document.querySelector('.back-trigger');
+    const contactBtn = document.querySelector('.contact-trigger');
 
-    this.resourceCache = new Map();
-
-    if (!this.dom.section) return;
-    this.init();
-    
-    this.setupVisibilityListener();
-    this.setupGalleryVideoObserver();
-    this.setupButtonGlowEffect();
-
-    setTimeout(() => this.preloadCategoryResources(), 1000);
-  }
-
-  init() {
-    this.renderGallery();
-    this.setupInteractions();
-  }
-
-  setupVisibilityListener() {
-    document.addEventListener('visibilitychange', () => {
-      this.state.isProjectActive = !document.hidden;
-      this.handleVideoPlayback();
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            const projectId = card.getAttribute('data-project');
+            openProjectModal(projectId);
+        });
     });
-  }
 
-  setupGalleryVideoObserver() {
-    this.state.galleryVideoObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const video = entry.target;
-        if (entry.isIntersecting && this.state.isProjectActive) {
-          video.play().catch(e => console.log('Gallery video autoplay prevented:', e));
+    if(backBtn) backBtn.addEventListener('click', closeProjectModal);
+    if(contactBtn) contactBtn.addEventListener('click', () => {
+        console.log("Contact action");
+        closeProjectModal();
+    });
+    
+    window.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") closeProjectModal();
+    });
+}
+
+function openProjectModal(id) {
+    const data = projectsData[id];
+    if (!data) return;
+
+    modalActiveProject = id;
+    currentSlideIndex = 0;
+
+    document.getElementById('modal-project-title').textContent = data.title;
+    document.getElementById('modal-project-desc').textContent = data.description;
+    
+    const slider = document.getElementById('modal-media-slider');
+    const dotsContainer = document.getElementById('slider-dots');
+    
+    slider.innerHTML = '';
+    dotsContainer.innerHTML = '';
+    slider.style.transform = `translateX(0)`;
+
+    data.media.forEach((item, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'media-item';
+        if (item.type === 'video') {
+            slide.innerHTML = `<video src="${item.url}" autoplay muted loop playsinline></video>`;
         } else {
-          video.pause();
+            slide.innerHTML = `<img src="${item.url}" alt="Project">`;
         }
-      });
-    }, { threshold: 0.5 });
+        slider.appendChild(slide);
 
-    const galleryVideos = this.dom.gallery.querySelectorAll('video');
-    galleryVideos.forEach(video => {
-      this.state.galleryVideoObserver.observe(video);
+        const dot = document.createElement('div');
+        dot.className = `slider-dot ${index === 0 ? 'active' : ''}`;
+        dotsContainer.appendChild(dot);
     });
-  }
 
-  setupButtonGlowEffect() {
-    const buttons = document.querySelectorAll('.view-more');
+    renderRelated(id);
+
+    const modal = document.getElementById('project-modal');
+    modal.style.display = 'block';
     
-    buttons.forEach(button => {
-      button.addEventListener('mousemove', (e) => {
-        const rect = button.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        button.style.setProperty('--x', `${x}px`);
-        button.style.setProperty('--y', `${y}px`);
-      });
-
-      button.addEventListener('mouseleave', () => {
-        button.style.setProperty('--x', '50%');
-        button.style.setProperty('--y', '50%');
-      });
+    const scrollContainer = document.querySelector('.modal-scroll-container');
+    if (modalLenis) modalLenis.destroy();
+    
+    modalLenis = new Lenis({
+        wrapper: scrollContainer,
+        content: document.getElementById('modal-lenis-content'),
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true
     });
-  }
 
-  preloadCategoryResources() {
-    const projects = this.getProjects();
-    projects.slice(0, 3).forEach(project => {
-      if (project.thumbnail.endsWith('.mp4')) {
-        if (!this.resourceCache.has(project.thumbnail)) {
-          const video = document.createElement('video');
-          video.src = project.thumbnail;
-          video.preload = 'metadata';
-          this.resourceCache.set(project.thumbnail, video);
+    function modalRaf(time) {
+        modalLenis.raf(time);
+        requestAnimationFrame(modalRaf);
+    }
+    requestAnimationFrame(modalRaf);
+
+    const tl = gsap.timeline({
+        onStart: () => {
+            if (window.lenis) window.lenis.stop();
+            document.body.style.overflow = 'hidden';
+        },
+        onComplete: () => {
+            ScrollTrigger.refresh();
         }
-      } else {
-        if (!this.resourceCache.has(project.thumbnail)) {
-          const img = new Image();
-          img.src = project.thumbnail;
-          this.resourceCache.set(project.thumbnail, img);
-        }
-      }
-      
-      project.images.slice(0, 2).forEach(media => {
-        if (!this.resourceCache.has(media)) {
-          if (media.endsWith('.mp4')) {
-            const video = document.createElement('video');
-            video.src = media;
-            video.preload = 'metadata';
-            this.resourceCache.set(media, video);
-          } else {
-            const img = new Image();
-            img.src = media;
-            this.resourceCache.set(media, img);
-          }
-        }
-      });
-    });
-  }
-
-  preloadProjectResources(project) {
-    project.images.slice(0, 2).forEach(media => {
-      if (!this.resourceCache.has(media)) {
-        if (media.endsWith('.mp4')) {
-          const video = document.createElement('video');
-          video.src = media;
-          video.preload = 'metadata';
-          this.resourceCache.set(media, video);
-        } else {
-          const img = new Image();
-          img.src = media;
-          this.resourceCache.set(media, img);
-        }
-      }
-    });
-  }
-
-  handleVideoPlayback() {
-    const videos = Array.from(this.dom.modal.querySelectorAll('video'));
-    
-    videos.forEach(video => {
-      if (this.state.isProjectActive && this.state.modalOpen) {
-        const parentSlide = video.closest('.gallery-slide');
-        if (parentSlide && parentSlide.classList.contains('active')) {
-          video.play().catch(e => console.log('Autoplay prevented:', e));
-        }
-      } else {
-        video.pause();
-      }
     });
 
-    const galleryVideos = Array.from(this.dom.gallery.querySelectorAll('video'));
-    galleryVideos.forEach(video => {
-      if (this.state.isProjectActive) {
-        const parentSlide = video.closest('.project-slide');
-        if (parentSlide && parentSlide.classList.contains('active')) {
-          video.play().catch(e => console.log('Gallery video autoplay prevented:', e));
-        }
-      } else {
-        video.pause();
-      }
-    });
-  }
+    gsap.set(modal, { opacity: 0, scale: 0.95 });
+    gsap.set(".modal-nav", { y: -50, opacity: 0 });
+    gsap.set(".reveal-element", { y: 60, opacity: 0 });
 
-  getProjects() {
-    return PROJECTS_DATA[this.state.category] || [];
-  }
+    tl.to(modal, { 
+        opacity: 1, 
+        scale: 1, 
+        duration: 0.5, 
+        ease: "power3.out" 
+    })
+    .to(".modal-nav", { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.6, 
+        ease: "back.out(1.4)" 
+    }, "-=0.3")
+    .to(".reveal-element", { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        stagger: 0.1, 
+        ease: "power4.out" 
+    }, "-=0.4");
 
-  renderGallery() {
-    const projects = this.getProjects();
-    this.dom.gallery.innerHTML = projects.map((p, i) => {
-      if (p.thumbnail.endsWith('.mp4')) {
-        return `
-          <div class="project-slide ${this.getSlideClass(i)}" data-id="${p.id}" data-index="${i}">
-            <video class="project-thumbnail video-thumbnail" muted loop playsinline preload="metadata">
-              <source src="${p.thumbnail}" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <div class="project-overlay">
-              <a href="#" class="view-more" data-id="${p.id}">VIEW MORE DETAILS</a>
-            </div>
-          </div>
-        `;
-      } else {
-        return `
-          <div class="project-slide ${this.getSlideClass(i)}" data-id="${p.id}" data-index="${i}">
-            <img src="${p.thumbnail}" alt="${p.name}" class="project-thumbnail" loading="lazy">
-            <div class="project-overlay">
-              <a href="#" class="view-more" data-id="${p.id}">VIEW MORE DETAILS</a>
-            </div>
-          </div>
-        `;
-      }
-    }).join('');
+    modalLenis.scrollTo(0, { immediate: true });
+}
 
-    setTimeout(() => {
-      const newGalleryVideos = this.dom.gallery.querySelectorAll('video');
-      newGalleryVideos.forEach(video => {
-        if (this.state.galleryVideoObserver) {
-          this.state.galleryVideoObserver.observe(video);
-        }
-      });
-      
-      this.setupButtonGlowEffect();
-    }, 50);
-  }
-
-  getSlideClass(idx) {
-    const total = this.getProjects().length;
-    const current = this.state.idx;
-    const diff = (idx - current + total) % total;
-
-    if (diff === 0) return 'active';
-    if (diff === 1) return 'next';
-    if (diff === total - 1) return 'prev';
-    if (diff === 2) return 'far-next';
-    if (diff === total - 2) return 'far-prev';
-    return 'hidden';
-  }
-
-  updateGalleryClasses() {
-    const slides = Array.from(this.dom.gallery.children);
-    slides.forEach((slide, i) => {
-      slide.className = `project-slide ${this.getSlideClass(i)}`;
-    });
-  }
-
-  moveGallery(dir) {
-    if (this.state.isChanging) return;
+function closeProjectModal() {
+    const modal = document.getElementById('project-modal');
     
-    this.state.isChanging = true;
-    const total = this.getProjects().length;
-    this.state.idx = (this.state.idx + (dir === 'next' ? 1 : -1) + total) % total;
-    
-    this.dom.gallery.classList.add('quick-transition');
-    this.updateGalleryClasses();
-    
-    setTimeout(() => {
-      this.dom.gallery.classList.remove('quick-transition');
-      this.state.isChanging = false;
-    }, 300);
-  }
-
-  openModal(id) {
-    const project = this.getProjects().find(p => p.id === id);
-    if (!project) return;
-
-    this.state.modalOpen = true;
-    document.documentElement.classList.add('modal-open');
-    this.dom.modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-
-    this.updateModalContent(project);
-    
-    requestAnimationFrame(() => {
-      this.dom.modalContent.scrollTop = 0;
-      this.animateText();
-    });
-  }
-
-  closeModal() {
-    const videos = Array.from(this.dom.modal.querySelectorAll('video'));
-    videos.forEach(video => {
-      video.pause();
-      video.currentTime = 0;
-    });
-
-    this.state.modalOpen = false;
-    this.dom.modal.classList.add('closing');
-    this.clearTyping();
-    
-    setTimeout(() => {
-      this.dom.modal.classList.remove('active', 'closing');
-      document.body.style.overflow = '';
-      document.documentElement.classList.remove('modal-open');
-    }, 400);
-  }
-
-  updateModalContent(project) {
-    this.dom.details.title.textContent = 'UI/UX Design Projects';
-    this.dom.details.name.textContent = project.name;
-    this.dom.details.desc.textContent = project.description;
-    
-    this.dom.details.features.innerHTML = project.features.map(f => `
-      <li><ion-icon name="checkmark-circle"></ion-icon><span class="feature-text">${f}</span></li>
-    `).join('');
-
-    this.renderModalSlides(project.images);
-    this.renderRelated(project.id);
-  }
-
-  renderModalSlides(images) {
-    images.slice(0, 2).forEach(media => {
-      if (!this.resourceCache.has(media)) {
-        if (media.endsWith('.mp4')) {
-          const preloadVideo = document.createElement('video');
-          preloadVideo.src = media;
-          preloadVideo.preload = 'metadata';
-          this.resourceCache.set(media, preloadVideo);
-        } else {
-          const preloadImg = new Image();
-          preloadImg.src = media;
-          this.resourceCache.set(media, preloadImg);
-        }
-      }
-    });
-
-    this.dom.slidesContainer.innerHTML = images.map((media, i) => {
-      if (media.endsWith('.mp4')) {
-        return `
-          <div class="gallery-slide ${i === 0 ? 'active' : ''}">
-            <div class="video-container">
-              <video class="gallery-video" muted loop playsinline preload="${i === 0 ? 'auto' : 'metadata'}">
-                <source src="${media}" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-        `;
-      } else {
-        return `
-          <div class="gallery-slide ${i === 0 ? 'active' : ''}">
-            <img src="${media}" alt="Slide ${i}" class="gallery-image" loading="${i === 0 ? 'eager' : 'lazy'}">
-          </div>
-        `;
-      }
-    }).join('');
-    
-    this.state.slideIdx = 0;
-    setTimeout(() => this.initializeVideos(), 50);
-  }
-
-  initializeVideos() {
-    const videos = Array.from(this.dom.slidesContainer.querySelectorAll('video'));
-    
-    const activeSlide = this.dom.slidesContainer.querySelector('.gallery-slide.active');
-    if (activeSlide) {
-      const activeVideo = activeSlide.querySelector('video');
-      if (activeVideo && this.state.isProjectActive) {
-        setTimeout(() => {
-          activeVideo.play().catch(e => {
-            console.log('Autoplay prevented for active video:', e);
-            if (e.name === 'NotAllowedError') {
-              activeVideo.controls = true;
+    gsap.to(modal, {
+        opacity: 0,
+        scale: 0.98,
+        duration: 0.3,
+        ease: "power2.inOut",
+        onComplete: () => {
+            modal.style.display = 'none';
+            if (window.lenis) window.lenis.start();
+            document.body.style.overflow = '';
+            
+            if (modalLenis) {
+                modalLenis.destroy();
+                modalLenis = null;
             }
-          });
-        }, 100);
-      }
-    }
+            
+            const videos = modal.querySelectorAll('video');
+            videos.forEach(v => v.pause());
+        }
+    });
+}
+
+function moveSlider(dir) {
+    const data = projectsData[modalActiveProject];
+    const total = data.media.length;
+    currentSlideIndex += dir;
+    if (currentSlideIndex < 0) currentSlideIndex = total - 1;
+    if (currentSlideIndex >= total) currentSlideIndex = 0;
     
-    videos.forEach((video, index) => {
-      const parentSlide = video.closest('.gallery-slide');
-      
-      if (parentSlide.classList.contains('active')) {
-        video.preload = 'auto';
-      } else {
-        video.preload = 'metadata';
-        video.load();
-      }
-      
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && this.state.isProjectActive && this.state.modalOpen) {
-            video.play().catch(e => {
-              console.log('Autoplay prevented for video:', e);
+    const slider = document.getElementById('modal-media-slider');
+    slider.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+
+    const dots = document.querySelectorAll('.slider-dot');
+    dots.forEach((dot, idx) => {
+        if (idx === currentSlideIndex) dot.classList.add('active');
+        else dot.classList.remove('active');
+    });
+}
+
+function renderRelated(currentId) {
+    const grid = document.getElementById('related-projects-grid');
+    grid.innerHTML = '';
+    const otherKeys = Object.keys(projectsData).filter(key => key !== currentId);
+    
+    otherKeys.forEach(key => {
+        const p = projectsData[key];
+        const card = document.createElement('div');
+        card.className = 'work-card active-related';
+        card.style.cssText = "width: 100%; left: 0; cursor: pointer;";
+        
+        card.innerHTML = `
+            <img src="${p.media[2].url}" class="wc-img" style="filter: grayscale(0)">
+            <div class="wc-overlay" style="opacity: 1">
+                <span class="wc-cat">View Next</span>
+                <h3 class="wc-title" style="font-size: 1.5rem">${p.title}</h3>
+            </div>
+        `;
+        card.onclick = () => {
+            gsap.to(".modal-scroll-container", { scrollTop: 0, duration: 0.5 });
+            if(modalLenis) modalLenis.scrollTo(0, { duration: 0.5 });
+            
+            setTimeout(() => {
+                openProjectModal(key);
+            }, 300);
+        };
+        grid.appendChild(card);
+    });
+}
+
+function initProjectsAnimations() {
+    let mm = gsap.matchMedia();
+
+    mm.add("(min-width: 1024px)", () => {
+        const fwContainer = document.querySelector(".fw-track");
+        const fwItems = document.querySelectorAll(".fw-item");
+        if (fwContainer) {
+            gsap.to(fwContainer, {
+                x: () => -(fwContainer.scrollWidth - window.innerWidth + 100),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".fw-section",
+                    pin: true, scrub: 1, end: "+=2000",
+                    onUpdate: (self) => {
+                        const progress = self.progress;
+                        fwItems.forEach((item, i) => {
+                            if (progress >= i * 0.3 && progress < (i + 1) * 0.4) item.classList.add('active');
+                            else item.classList.remove('active');
+                        });
+                    }
+                }
             });
-          } else {
-            video.pause();
-          }
+        }
+
+        const worksTL = gsap.timeline({
+            scrollTrigger: { trigger: ".works-section", pin: true, start: "top top", end: "+=2500", scrub: 1 }
         });
-      }, { threshold: 0.3 });
-      
-      observer.observe(parentSlide);
-      this.state.videoElements.set(video, observer);
-    });
-  }
-
-  changeModalSlide(dir) {
-    const slides = this.dom.slidesContainer.children;
-    if (!slides.length) return;
-
-    const currentSlide = slides[this.state.slideIdx];
-    const currentVideo = currentSlide.querySelector('video');
-    if (currentVideo) {
-      currentVideo.pause();
-    }
-
-    slides[this.state.slideIdx].classList.remove('active');
-    this.state.slideIdx = (this.state.slideIdx + (dir === 'next' ? 1 : -1) + slides.length) % slides.length;
-    slides[this.state.slideIdx].classList.add('active');
-
-    const newSlide = slides[this.state.slideIdx];
-    const newVideo = newSlide.querySelector('video');
-    if (newVideo && this.state.isProjectActive) {
-      newVideo.play().catch(e => console.log('Autoplay prevented when changing slide:', e));
-    }
-  }
-
-  renderRelated(currentId) {
-    const all = this.getProjects();
-    const currentIdx = all.findIndex(p => p.id === currentId);
-    const related = [1, 2].map(offset => all[(currentIdx + offset) % all.length]);
-
-    this.dom.related.innerHTML = related.map(p => {
-      if (p.thumbnail.endsWith('.mp4')) {
-        return `
-          <div class="related-project" data-id="${p.id}">
-            <video class="related-image video-thumbnail" muted loop playsinline preload="metadata">
-              <source src="${p.thumbnail}" type="video/mp4">
-            </video>
-            <div class="related-overlay"><h4 class="related-title">${p.name}</h4></div>
-          </div>
-        `;
-      } else {
-        return `
-          <div class="related-project" data-id="${p.id}">
-            <img src="${p.thumbnail}" alt="${p.name}" class="related-image" loading="lazy">
-            <div class="related-overlay"><h4 class="related-title">${p.name}</h4></div>
-          </div>
-        `;
-      }
-    }).join('');
-  }
-
-  animateText() {
-    const elements = [
-      this.dom.details.name, 
-      this.dom.details.desc, 
-      ...this.dom.details.features.children
-    ];
-
-    elements.forEach(el => el.classList.remove('typing'));
-    
-    let delay = 200;
-    elements.forEach(el => {
-      const timeout = setTimeout(() => {
-        el.classList.add('typing');
-        const textSpan = el.querySelector('.feature-text');
-        if (textSpan) textSpan.classList.add('typing');
-      }, delay);
-      
-      this.state.typingTimeouts.push(timeout);
-      delay += 100;
-    });
-  }
-
-  clearTyping() {
-    this.state.typingTimeouts.forEach(t => clearTimeout(t));
-    this.state.typingTimeouts = [];
-    
-    this.state.videoElements.forEach((observer, video) => {
-      observer.unobserve(video);
-      video.pause();
-    });
-    this.state.videoElements.clear();
-  }
-
-  handleCategory(btn) {
-    this.dom.btns.cats.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    this.state.category = btn.dataset.category;
-    this.state.idx = 0;
-    this.renderGallery();
-    this.preloadCategoryResources();
-  }
-
-  setupInteractions() {
-    this.dom.gallery.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      const slide = e.target.closest('.project-slide');
-      if (!slide) return;
-      
-      const idx = parseInt(slide.dataset.index);
-      const isViewBtn = e.target.closest('.view-more');
-      
-      if (isViewBtn) {
-        this.openModal(parseInt(slide.dataset.id));
-        return;
-      }
-      
-      if (idx === this.state.idx) {
-        this.openModal(parseInt(slide.dataset.id));
-        return;
-      }
-      
-      if (this.state.isChanging) return;
-      
-      this.state.isChanging = true;
-      
-      this.dom.gallery.classList.add('quick-change');
-      
-      setTimeout(() => {
-        this.state.idx = idx;
-        this.updateGalleryClasses();
-        
-        setTimeout(() => {
-          this.dom.gallery.classList.remove('quick-change');
-          this.state.isChanging = false;
-        }, 300);
-      }, 10);
+        worksTL.to(".works-header-abs", { scale: 0.4, x: "-35vw", duration: 1, ease: "power2.inOut" }, "start")
+               .to(".works-gradient-mask", { opacity: 1, duration: 1 }, "start");
+        const workTrack = document.querySelector('.works-track');
+        if (workTrack) {
+            worksTL.fromTo(".works-track", { x: "120vw" }, {
+                x: () => -(workTrack.scrollWidth - window.innerWidth * 0.45),
+                duration: 3, ease: "none"
+            }, "start");
+        }
     });
 
-    this.dom.btns.cats.forEach(btn => 
-      btn.addEventListener('click', () => this.handleCategory(btn))
-    );
-
-    this.dom.btns.close.addEventListener('click', () => this.closeModal());
-    this.dom.btns.prev.addEventListener('click', () => this.changeModalSlide('prev'));
-    this.dom.btns.next.addEventListener('click', () => this.changeModalSlide('next'));
-
-    this.dom.related.addEventListener('click', (e) => {
-      const item = e.target.closest('.related-project');
-      if (!item) return;
-      
-      const projectId = parseInt(item.dataset.id);
-      const newProject = this.getProjects().find(p => p.id === projectId);
-      
-      if (!newProject) return;
-      
-      this.preloadProjectResources(newProject);
-      
-      this.dom.modalContent.style.opacity = '0.6';
-      this.dom.modalContent.classList.add('changing');
-      
-      setTimeout(() => {
-        this.updateModalContent(newProject);
-        
-        requestAnimationFrame(() => {
-          this.dom.modalContent.scrollTop = 0;
-          this.animateText();
-          
-          setTimeout(() => {
-            this.dom.modalContent.style.opacity = '1';
-            this.dom.modalContent.classList.remove('changing');
-          }, 50);
+    mm.add("(max-width: 1023px)", () => {
+        const fwItems = document.querySelectorAll(".fw-item");
+        fwItems.forEach(item => {
+            gsap.to(item, {
+                scrollTrigger: { trigger: item, start: "top center+=100", end: "bottom center-=100", toggleClass: "active" }
+            });
         });
-      }, 150);
+        const mobileWorksTL = gsap.timeline({
+            scrollTrigger: { trigger: ".works-section", pin: true, start: "top top", end: "+=1800", scrub: 1 }
+        });
+        mobileWorksTL.to(".works-header-abs", { scale: 0.6, y: "-38vh", duration: 1, ease: "power2.inOut" }, "start")
+                     .to(".works-gradient-mask", { opacity: 1, duration: 1 }, "start");
+        const workTrack = document.querySelector('.works-track');
+        if (workTrack) {
+            mobileWorksTL.fromTo(".works-track", { y: "60vh", opacity: 0 }, { 
+                y: "12vh", opacity: 1, duration: 1, ease: "power2.inOut" 
+            }, "start");
+            const scrollDist = workTrack.scrollHeight - window.innerHeight * 0.5; 
+            mobileWorksTL.to(".works-track", { y: -scrollDist, duration: 3, ease: "none" });
+        }
     });
-
-    this.dom.btns.contact.addEventListener('click', () => {
-      this.closeModal();
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (this.state.modalOpen) {
-        if (e.key === 'Escape') this.closeModal();
-        if (e.key === 'ArrowLeft') this.changeModalSlide('prev');
-        if (e.key === 'ArrowRight') this.changeModalSlide('next');
-      } else {
-        if (e.key === 'ArrowLeft') this.moveGallery('prev');
-        if (e.key === 'ArrowRight') this.moveGallery('next');
-      }
-    });
-  }
 }
 
-document.addEventListener('DOMContentLoaded', () => new ProjectManager());
-
-const projectsObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('fade-in');
-    }
-  });
-}, { threshold: 0.2 });
-
-const projectsContainer = document.querySelector('.projects-container');
-if (projectsContainer) {
-  projectsObserver.observe(projectsContainer);
-}
+document.addEventListener('DOMContentLoaded', () => {
+    initProjectsAnimations();
+    initProjectModal();
+});

@@ -1,1007 +1,629 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="antialiased">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANDZ</title>
-    <base href="/"> 
-    <link rel="stylesheet" href="css/switch.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/about.css">
-    <link rel="stylesheet" href="css/contact.css">
-    <link rel="stylesheet" href="css/cv.css">
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/projects.css">
-    <link rel="stylesheet" href="css/reviews.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="manifest" href="https://andzcr.github.io/assets/favicon/site.webmanifest">
-    <meta name="theme-color" content="#ffffff"> 
+    <title>ANDZ.ro | Studio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="https://andzcr.github.io/assets/favicon/apple-touch-icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="∀ N D Z">
     <link rel="icon" type="image/png" sizes="32x32" href="https://andzcr.github.io/assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://andzcr.github.io/assets/favicon/favicon-16x16.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/services.css">
+    <link rel="stylesheet" href="css/projects.css">
+    <link rel="stylesheet" href="css/reviews.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/standout.css">
+    <link rel="stylesheet" href="css/contact.css">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
-    <style>
-        .logo-layer img {
-            filter: brightness(0);
-        }
-        .logo-layer {
-            background: none !important;
-            -webkit-text-fill-color: initial !important;
-        }
-    </style>
-</head>
-<body>
-<nav class="ios-nav-wrapper" id="ios-navbar">
-    <ul class="ios-nav-list">
-        
-        <li class="ios-nav-item active">
-            <a href="#home" class="ios-link" data-section="home">
-                <div class="icon-box">
-                    <ion-icon name="home-outline" class="ico-out"></ion-icon>
-                    <ion-icon name="home" class="ico-fill"></ion-icon>
-                </div>
-                <span class="ios-label">Home</span>
-            </a>
-            <div class="active-glow"></div>
-        </li>
-
-        <li class="ios-nav-item">
-            <a href="#about" class="ios-link" data-section="about">
-                <div class="icon-box">
-                    <ion-icon name="finger-print-outline" class="ico-out"></ion-icon>
-                    <ion-icon name="finger-print" class="ico-fill"></ion-icon>
-                </div>
-                <span class="ios-label">About Me</span>
-            </a>
-            <div class="active-glow"></div>
-        </li>
-
-        <li class="ios-nav-item">
-            <a href="#cv-section" class="ios-link" data-section="cv-section">
-                <div class="icon-box">
-                    <ion-icon name="code-working-outline" class="ico-out"></ion-icon>
-                    <ion-icon name="code-working" class="ico-fill"></ion-icon>
-                </div>
-                <span class="ios-label">Technologies</span>
-            </a>
-            <div class="active-glow"></div>
-        </li>
-
-        <li class="ios-nav-item">
-            <a href="#projects" class="ios-link" data-section="projects">
-                <div class="icon-box">
-                    <ion-icon name="layers-outline" class="ico-out"></ion-icon>
-                    <ion-icon name="layers" class="ico-fill"></ion-icon>
-                </div>
-                <span class="ios-label">Projects</span>
-            </a>
-            <div class="active-glow"></div>
-        </li>
-
-        <li class="ios-nav-item">
-            <a href="#reviews" class="ios-link" data-section="reviews">
-                <div class="icon-box">
-                    <ion-icon name="star-outline" class="ico-out"></ion-icon>
-                    <ion-icon name="star" class="ico-fill"></ion-icon>
-                </div>
-                <span class="ios-label">Reviews</span>
-            </a>
-            <div class="active-glow"></div>
-        </li>
-
-        <li class="ios-nav-item">
-            <a href="#contact" class="ios-link" data-section="contact">
-                <div class="icon-box">
-                    <ion-icon name="paper-plane-outline" class="ico-out"></ion-icon>
-                    <ion-icon name="paper-plane" class="ico-fill"></ion-icon>
-                </div>
-                <span class="ios-label">Contact</span>
-            </a>
-            <div class="active-glow"></div>
-        </li>
-    </ul>
-
-    <div class="nav-progress-container">
-        <div class="nav-progress-bar" id="nav-progress-bar"></div>
-    </div>
-</nav>
-    <canvas id="snow-container"></canvas>
-
-    <div id="winter-loader">
-        <div class="mist-layer"></div>
-        <div class="got-text" id="got-message">Winter Is Coming</div>
-        <div class="got-line"></div>
-    </div>
-
-    <div id="theme-trigger" class="side-tab">
-        <span class="tab-text">THEMES</span>
-    </div>
-
-    <div id="loading-overlay">
-        <div class="loader-content">
-            <div class="fleur-wrapper">
-                <span class="fleur-ghost"><img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="ANDZ Logo" style="height: 1em; width: auto; vertical-align: middle;"></span>
-                <div class="fleur-fill-container"><span class="fleur-fill"><img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="ANDZ Logo" style="height: 1em; width: auto; vertical-align: middle;"></span></div>
-            </div>
-            <div class="loader-text">Good taste! Please wait<span class="dots"></span></div>
-        </div>
-    </div>
-
-    <div id="theme-drawer" class="theme-wrapper">
-        <div class="theme-panel">
-            <div class="close-btn" id="close-menu-btn">×</div>
-            
-            <div class="panel-header">
-                <h3>Appearance</h3>
-                
-                <div class="tabs-nav">
-                    <div class="tab-indicator" id="tab-line"></div>
-                    <button class="tab-btn active" id="btn-themes" data-target="themes">THEMES</button>
-                    <button class="tab-btn" id="btn-effects" data-target="effects">EFFECTS</button>
-                </div>
-            </div>
-
-            <div class="panel-content">
-                <div id="view-themes" class="tab-view active">
-                    <div class="theme-section">
-                        <span class="section-label">Simple Themes</span>
-                        <div class="theme-grid basic-grid">
-                            <button class="theme-btn big-card" data-theme="default">
-                                <div class="card-visual dark-visual"><div class="mini-ui"></div></div>
-                                <div class="card-info"><span class="name">Dark ⏾</span></div>
-                            </button>
-                            <button class="theme-btn big-card" data-theme="light">
-                                <div class="card-visual light-visual"><div class="mini-ui"></div></div>
-                                <div class="card-info"><span class="name">Light ☀︎</span></div>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="theme-section">
-                        <span class="section-label">Color Themes</span>
-                        <div class="theme-grid collection-grid">
-                            <button class="theme-btn collection-card style-midnight" data-theme="midnight-purple"><div class="mini-window"><div class="win-sidebar"></div><div class="win-content"></div></div><div class="collection-info"><span class="col-title">Midnight Purple</span><span class="col-sub">Purple Focus</span></div></button>
-                            <button class="theme-btn collection-card style-blood" data-theme="blood-cream"><div class="mini-window"><div class="win-sidebar"></div><div class="win-content"></div></div><div class="collection-info"><span class="col-title">Blood Cream</span><span class="col-sub">Warm Contrast</span></div></button>
-                            <button class="theme-btn collection-card style-wine" data-theme="wine-cloud"><div class="mini-window"><div class="win-sidebar"></div><div class="win-content"></div></div><div class="collection-info"><span class="col-title">Wine Cloud</span><span class="col-sub">Soft & Deep</span></div></button>
-                            <button class="theme-btn collection-card style-ivory" data-theme="pure-ivory"><div class="mini-window"><div class="win-sidebar"></div><div class="win-content"></div></div><div class="collection-info"><span class="col-title">Pure Ivory</span><span class="col-sub">Clean Look</span></div></button>
-                            <button class="theme-btn collection-card style-gold" data-theme="golden-noir"><div class="mini-window"><div class="win-sidebar"></div><div class="win-content"></div></div><div class="collection-info"><span class="col-title">Golden Noir</span><span class="col-sub">Luxury Dark</span></div></button>
-                            <button class="theme-btn collection-card style-sage" data-theme="sage-aura"><div class="mini-window"><div class="win-sidebar"></div><div class="win-content"></div></div><div class="collection-info"><span class="col-title">Sage Aura</span><span class="col-sub">Calm Nature</span></div></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="view-effects" class="tab-view">
-                    <div class="theme-section">
-                        <span class="section-label">Seasonal Effects</span>
-                        <button id="winter-card" class="theme-btn seasonal-card">
-                            <canvas id="btn-snow-canvas"></canvas>
-                            <div class="card-info">
-                                <span class="name">Winter Mode</span>
-                                <span class="col-sub" style="opacity: 0.7; font-size: 11px;">Cinematic Snow</span>
-                            </div>
-                            <div class="seasonal-icon">❄︎</div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<main>
-
-<section id="home">
-    <div class="bg-reveal-wrapper">
-        <div class="bg-base"></div>
-        <canvas id="reveal-canvas"></canvas>
-        <div class="video-gradient-overlay"></div>
-    </div>
-
-    <div class="home-content">
-        <div class="top-left-brand">
-            <div class="logo-3d-wrapper">
-                <div class="logo-3d-scene">
-                    <div class="logo-3d-obj">
-                        <span class="logo-layer l1"><img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="ANDZ Logo" style="height: 1em; width: auto;"></span>
-                        <span class="logo-layer l2"><img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="ANDZ Logo" style="height: 1em; width: auto;"></span>
-                        <span class="logo-layer l3"><img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="ANDZ Logo" style="height: 1em; width: auto;"></span>
-                        <span class="logo-layer l4"><img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="ANDZ Logo" style="height: 1em; width: auto;"></span>
-                        <span class="logo-layer l5"><img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="ANDZ Logo" style="height: 1em; width: auto;"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="brand-text">
-                <h1 class="brand-name">ANDZ</h1>
-                <div class="brand-sub-rotator" id="subtitle-rotator">
-                    <span class="brand-sub-item active">BRAND DESIGNER</span>
-                    <span class="brand-sub-item">WEB DEVELOPER</span>
-                    <span class="brand-sub-item">CONTENT CREATOR</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="social-slider-container">
-            <div class="social-track">
-                <a href="https://github.com/andzcr" target="_blank" class="social-pill"><ion-icon name="logo-github"></ion-icon><span class="social-tooltip">GitHub</span></a>
-                <a href="https://linkedin.com/in/lehadus-andrei-25a807372/" target="_blank" class="social-pill"><ion-icon name="logo-linkedin"></ion-icon><span class="social-tooltip">LinkedIn</span></a>
-                <a href="https://instagram.com/ndr.xc" target="_blank" class="social-pill"><ion-icon name="logo-instagram"></ion-icon><span class="social-tooltip">Instagram</span></a>
-                <a href="https://www.tiktok.com/@andz_cr" target="_blank" class="social-pill"><ion-icon name="logo-tiktok"></ion-icon><span class="social-tooltip">TikTok</span></a>
-                <a href="mailto:andz.contact@gmail.com" class="social-pill"><ion-icon name="mail-outline"></ion-icon><span class="social-tooltip">Email</span></a>
-                <a href="https://youtube.com/@visualssamp" target="_blank" class="social-pill"><ion-icon name="logo-youtube"></ion-icon><span class="social-tooltip">YouTube</span></a>
-                <a href="https://github.com/andzcr" target="_blank" class="social-pill"><ion-icon name="logo-github"></ion-icon><span class="social-tooltip">GitHub</span></a>
-                <a href="https://linkedin.com/in/lehadus-andrei-25a807372/" target="_blank" class="social-pill"><ion-icon name="logo-linkedin"></ion-icon><span class="social-tooltip">LinkedIn</span></a>
-                <a href="https://instagram.com/ndr.xc" target="_blank" class="social-pill"><ion-icon name="logo-instagram"></ion-icon><span class="social-tooltip">Instagram</span></a>
-                <a href="https://www.tiktok.com/@andz_cr" target="_blank" class="social-pill"><ion-icon name="logo-tiktok"></ion-icon><span class="social-tooltip">TikTok</span></a>
-                <a href="mailto:andz.contact@gmail.com" class="social-pill"><ion-icon name="mail-outline"></ion-icon><span class="social-tooltip">Email</span></a>
-                <a href="https://youtube.com/@visualssamp" target="_blank" class="social-pill"><ion-icon name="logo-youtube"></ion-icon><span class="social-tooltip">YouTube</span></a>
-            </div>
-        </div>
-
-        <div class="bottom-left-group">
-            <div class="vision-top">WHERE YOUR BRAND</div>
-            <div class="vision-main-row">
-                <span class="vision-main">FEELS</span>
-                <div class="word-rotator" id="main-rotator">
-                    <span class="rotating-word active">Powerful.</span>
-                    <span class="rotating-word">Timeless.</span>
-                    <span class="rotating-word">Iconic.</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="smart-badge-wrapper right">
-            <a href="#contact" class="smart-badge contact-badge">
-                <div class="badge-label">
-                    <span class="badge-text">Get in touch</span>
-                    <ion-icon name="checkmark-done-outline"></ion-icon>
-                </div>
-                <div class="badge-content">
-                    <div class="badge-abstract-bg">
-                        <div class="noise-overlay"></div>
-                        <div class="gradient-mesh"></div>
-                    </div>
-                    <div class="badge-info contact-layout">
-                        <div class="c-header"><h3 class="c-title">Let's work together.</h3></div>
-                        <div class="c-body">
-                            <div class="c-row">
-                                <div class="c-icon-circle"><ion-icon name="mail-open-outline"></ion-icon></div>
-                                <div class="c-info"><span class="c-type">Email Address</span><span class="c-value">andz.contact@gmail.com</span></div>
-                            </div>
-                            <div class="c-row">
-                                <div class="c-icon-circle"><ion-icon name="phone-portrait-outline"></ion-icon></div>
-                                <div class="c-info"><span class="c-type">Phone Number</span><span class="c-value">+40 748 594 335</span></div>
-                            </div>
-                        </div>
-                        <div class="c-footer">
-                            <div class="c-location"><span class="loc-dot"></span> Galati, RO</div>
-                            <div class="c-action-text">Go to Contact <ion-icon name="arrow-forward"></ion-icon></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="magnetic-glow"></div>
-            </a>
-        </div>
-    </div>
-</section>
-
-<section id="about">
-  <div class="about-container">
-    
-    <div class="about-left-ios">
-      
-      <div class="ios-header apple-reveal">
-        <h1 class="ios-title">Hi, I'm Andrei <span class="wave-emoji">👋</span></h1>
-      </div>
-
-      <div class="ios-description apple-reveal" style="transition-delay: 100ms;">
-        <p>
-          I am a <span class="highlight-ios">21-year-old</span> student currently pursuing a degree in <span class="highlight-ios">Systems Engineering</span> within the Automation faculty. Passionate about <span class="highlight-ios">web development</span> - particularly the front-end side. I enjoy creating clean, intuitive, and visually engaging user experiences. I'm a serious and <span class="highlight-ios">detail-oriented</span> person who doesn't give up until I achieve the result I want.
-        </p>
-      </div>
-
-      <div class="ios-section apple-reveal" style="transition-delay: 200ms;">
-        <h3 class="ios-subtitle">Work Experience</h3>
-        
-        <div class="ios-card-group">
-          <a href="https://andzcr.github.io" target="_blank" class="ios-card">
-            <div class="ios-icon-box">
-              <img src="https://andzcr.github.io/assets/favicon/android-chrome-512x512.png" alt="Frontend Dev" class="ios-icon-img">
-            </div>
-            <div class="ios-card-content">
-              <div class="ios-card-header">
-                <span class="ios-card-title">Web Developer</span>
-                <span class="ios-card-date">September 2025 - Present</span>
-              </div>
-              <span class="ios-card-role">& Brand Designer</span>
-            </div>
-          </a>
-
-          <a href="https://www.bytecodeschool.com/index.html" target="_blank" class="ios-card">
-            <div class="ios-icon-box">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn1R7jQp2qr9QdsuUGTKkAfnCSUjPgJhQGGQ&s" alt="ByteCode School" class="ios-icon-img">
-            </div>
-            <div class="ios-card-content">
-              <div class="ios-card-header">
-                <span class="ios-card-title">ByteCode School</span>
-                <span class="ios-card-date">December 2025 - January 2026</span>
-              </div>
-              <span class="ios-card-role">Trainer</span>
-            </div>
-          </a>
-
-          <a href="https://www.logiscool.com/ro/" target="_blank" class="ios-card">
-            <div class="ios-icon-box">
-              <img src="https://educationalliancefinland.com/sites/default/files/styles/product-cover/public/products/c1278db8-21cd-48a5-a4f0-3af4a340b7f5.png?itok=2O7ZZd3o" alt="Logiscool" class="ios-icon-img">
-            </div>
-            <div class="ios-card-content">
-              <div class="ios-card-header">
-                <span class="ios-card-title">Logiscool Romania</span>
-                <span class="ios-card-date">May 2025 - July 2025</span>
-              </div>
-              <span class="ios-card-role">Asistent Trainer</span>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="ios-section apple-reveal" style="transition-delay: 300ms;">
-        <h3 class="ios-subtitle">Education</h3>
-
-        <div class="ios-card-group">
-          <a href="https://www.racovitagalati.ro" target="_blank" class="ios-card">
-            <div class="ios-icon-box">
-               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlqcKZz7AOzQfKQkwsxMvikljQY51G6MTDbQ&s" alt="Liceu" class="ios-icon-img">
-            </div>
-            <div class="ios-card-content">
-              <div class="ios-card-header">
-                <span class="ios-card-title">Liceul Teoretic "Emil Racovita"</span>
-                <span class="ios-card-date">September 2019 - July 2023</span>
-              </div>
-            </div>
-          </a>
-
-          <a href="https://aciee.ugal.ro" target="_blank" class="ios-card">
-            <div class="ios-icon-box">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM9cVjBjAF1LnZWH42Wt6A2l0X7ROmlJ1f3w&s" alt="Facultate" class="ios-icon-img">
-            </div>
-            <div class="ios-card-content">
-              <div class="ios-card-header">
-                <span class="ios-card-title">Facultatea de Automatica si Calculatoare din Galati</span>
-                <span class="ios-card-date">October 2023 - September 2027</span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="about-right-ios apple-reveal" style="transition-delay: 400ms;">
-      <div class="ios-image-wrapper">
-        <img src="https://andzcr.github.io/resources/photos/me.jpg" alt="Andrei Profile" class="ios-profile-img">
-        
-        <div class="ios-hover-overlay">
-          <div class="ios-qualities-list">
-            <span class="ios-quality-tag">Detail-oriented</span>
-            <span class="ios-quality-tag">Serious</span>
-            <span class="ios-quality-tag">Ambitious</span>
-            <span class="ios-quality-tag">Problem Solver</span>
-          </div>
-        </div>
-
-        <div class="ios-badge">
-          <ion-icon name="person-circle-outline"></ion-icon>
-          <span>That's Me</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section id="cv-section">
-    <div class="cv-tech-section">
-        <h2>Technologies & Tools</h2>
-        <div class="cv-tech-slider-container">
-            <div class="cv-tech-slider-mask left-mask"></div>
-            <div class="cv-tech-slider-mask right-mask"></div>
-            <div class="cv-tech-slider">
-                 <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" alt="LUA"><span>LUA</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><span>Python</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"><span>C++</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"><span>HTML</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS"><span>CSS</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"><span>JavaScript</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"><span>Firebase</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React.js"><span>React.js</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"><span>GitHub</span></div>
-                <div class="cv-tech-item"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" alt="Figma"><span>Figma</span></div>
-                <div class="cv-tech-item"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968472.png" alt="DaVinci Resolve"><span>DaVinci Resolve</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" alt="Photoshop"><span>Photoshop</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" alt="Adobe Illustrator"><span>Adobe Illustrator</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-plain.svg" alt="Premiere Pro"><span>Premiere Pro</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" alt="LUA"><span>LUA</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><span>Python</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"><span>C++</span></div>
-                <div class="cv-tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML"><span>HTML</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="brands-section">
-        <h2 class="brands-title">Why Brands Keep <br><span class="brands-subtitle">Coming Back.</span></h2>
-        
-        <div class="brands-grid">
-            <div class="brand-card">
-                <div class="brand-card-texture"></div>
-                <div class="card-spotlight"></div>
-                <span class="card-number-bg">01</span>
-                <div class="card-content-wrapper">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.11-1.54-3.46-3.26l1.86-.53c.12.76.62 1.34 1.6 1.34 1.1 0 1.7-.56 1.7-1.4 0-.81-.66-1.28-1.92-1.58-1.85-.43-2.73-1.42-2.73-2.67 0-1.41 1.05-2.52 2.95-2.88V5h2.67v1.88c1.37.25 2.53 1.13 2.93 2.62l-1.84.53c-.15-.55-.63-1.23-1.63-1.23-1.01 0-1.53.54-1.53 1.25 0 .76.67 1.18 2.01 1.5 1.94.46 2.65 1.52 2.65 2.72 0 1.53-1.11 2.66-3.03 2.82z"/></svg>
-                    </div>
-                    <div class="card-text">
-                        <h3>Design that convert</h3>
-                        <p>Built for today, flexible for what's next. A timeless approach to modern challenges.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="brand-card">
-                <div class="brand-card-texture"></div>
-                <div class="card-spotlight"></div>
-                <span class="card-number-bg">02</span>
-                <div class="card-content-wrapper">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
-                    </div>
-                    <div class="card-text">
-                        <h3>Thoughtful, not trendy.</h3>
-                        <p>My work is grounded in purpose, not passing fads. Strategy first, pixels second.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="brand-card">
-                <div class="brand-card-texture"></div>
-                <div class="card-spotlight"></div>
-                <span class="card-number-bg">03</span>
-                <div class="card-content-wrapper">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
-                    </div>
-                    <div class="card-text">
-                        <h3>Fast without the fuss</h3>
-                        <p>A streamlined process. Quick, clean & no chaos. Efficiency in every delivery.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="projects">
-  <div class="projects-container">
-    <div class="projects-header">
-      <h2 class="projects-title">My goal? Make your users feel the <br>same <span class="confidence">confidence</span> you feel in <br>your brand.</h2>
-    </div>
-      
-      <div class="projects-display">
-        <div class="projects-gallery">
-          </div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="project-modal" id="projectsModal">
-    <div class="modal-header">
-      <button class="back-btn" id="projectsBackBtn">
-        <ion-icon name="arrow-back"></ion-icon>
-        <span class="back-text">Go back</span>
-      </button>
-      
-      <button class="contact-btn" id="projectsContactBtn">
-        <span class="contact-text">Seen enough? Contact me now</span>
-        <ion-icon name="call"></ion-icon>
-      </button>
-    </div>
-    
-    <div class="modal-content">
-      <h2 class="modal-title">UI/UX Design Projects</h2>
-      <div class="title-divider"></div>
-      
-      <div class="project-details">
-        <div class="project-gallery">
-          <div class="gallery-container">
-            <button class="slide-btn prev-btn" id="projectsPrevBtn">
-              <ion-icon name="chevron-back"></ion-icon>
-            </button>
-            
-            <div class="gallery-slides" id="projectsGallerySlides">
-              </div>
-            
-            <button class="slide-btn next-btn" id="projectsNextBtn">
-              <ion-icon name="chevron-forward"></ion-icon>
-            </button>
-          </div>
-        </div>
-        
-        <div class="project-info">
-          <h3 class="project-name" id="projectsProjectName">Website Template 1</h3>
-          <div class="project-description">
-            <p id="projectsDescription">This project showcases a modern, responsive website with cutting-edge features designed to enhance user experience and drive engagement. Built with the latest technologies and frameworks, it provides a seamless experience across all devices and platforms.</p>
-            <ul class="key-features" id="projectsKeyFeatures">
-              <li>
-                <ion-icon name="checkmark-circle"></ion-icon>
-                <span class="feature-text">Advanced User Registration System</span>
-              </li>
-              <li>
-                <ion-icon name="checkmark-circle"></ion-icon>
-                <span class="feature-text">Interactive Review & Rating System</span>
-              </li>
-              <li>
-                <ion-icon name="checkmark-circle"></ion-icon>
-                <span class="feature-text">Real-time Chat Functionality</span>
-              </li>
-              <li>
-                <ion-icon name="checkmark-circle"></ion-icon>
-                <span class="feature-text">Payment Integration System</span>
-              </li>
-              <li>
-                <ion-icon name="checkmark-circle"></ion-icon>
-                <span class="feature-text">Advanced Analytics Dashboard</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      
-      <div class="divider-section">
-        <div class="divider-line"></div>
-        <div class="divider-text">
-          <span>Want to see more? Check these out</span>
-          <ion-icon name="chevron-down"></ion-icon>
-        </div>
-      </div>
-      
-      <div class="related-projects" id="projectsRelatedProjects">
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="reviews">
-  <div class="reviews-container">
-    <div class="reviews-left">
-      <div class="reviews-content">
-        <h1 class="reviews-title">
-          Reputation is everything <br>
-          Mine is <span class="flawless">flawless.</span>
-        </h1>
-        <p class="reviews-subtitle">Real People. Real Results</p>
-        
-        <div class="stats-container">
-          <div class="avg-rating">
-            <div class="rating-display">
-              <span class="rating-number" id="avg-rating-value">0.00</span>
-              <span class="rating-max">/5</span>
-            </div>
-            <div class="rating-bar">
-              <div class="rating-fill" id="rating-fill"></div>
-            </div>
-            <div class="total-votes" id="total-votes">0 reviews in total</div>
-          </div>
-        </div>
-        
-        <button class="submit-review-btn" id="open-form-btn">
-          <span>Share Your Experience</span>
-          <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-        </button>
-      </div>
-    </div>
-    <div class="reviews-right">
-      <div class="mask top-mask"></div>
-      <div class="mask bottom-mask"></div>
-      
-      <div class="reviews-slider">
-        <div class="review-column column-1"></div>
-        <div class="review-column column-2"></div>
-        <div class="review-column column-3"></div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="review-form-overlay" id="review-form">
-    <div class="form-header">
-      <button class="back-btn" id="back-btn">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-        <span class="back-text">Go Back</span>
-      </button>
-      <button class="submit-form-btn" id="submit-form-btn">
-        <span class="submit-text">Submit Review</span>
-        <ion-icon name="checkmark-outline"></ion-icon>
-      </button>
-    </div>
-    
-    <div class="form-layout">
-      <div class="form-side">
-        <div class="form-content">
-          <h2 class="form-title">Share Your Experience</h2>
-          
-          <form class="review-form" id="reviewForm">
-            <div class="form-section">
-              <div class="input-container">
-                <input type="text" id="fullName" name="fullName" required>
-                <label for="fullName" class="floating-label">Your Name</label>
-                <div class="input-glow"></div>
-              </div>
-            </div>
-            <div class="form-section">
-              <label class="section-label">Gender</label>
-              <div class="gender-options">
-                <label class="gender-option">
-                  <input type="radio" name="gender" value="male">
-                  <div class="option-content">
-                    <ion-icon name="male" class="option-icon"></ion-icon>
-                    <span class="option-text">Male</span>
-                  </div>
-                  <div class="selection-glow"></div>
-                </label>
-                <label class="gender-option">
-                  <input type="radio" name="gender" value="female">
-                  <div class="option-content">
-                    <ion-icon name="female" class="option-icon"></ion-icon>
-                    <span class="option-text">Female</span>
-                  </div>
-                  <div class="selection-glow"></div>
-                </label>
-              </div>
-            </div>
-            <div class="form-section">
-              <label class="section-label">Service Used</label>
-              <div class="service-options">
-                <label class="service-option">
-                  <input type="radio" name="service" value="Web Development">
-                  <div class="option-content">
-                    <ion-icon name="code-slash-outline" class="option-icon"></ion-icon>
-                    <span class="option-text">Web Development</span>
-                  </div>
-                  <div class="selection-glow"></div>
-                </label>
-                <label class="service-option">
-                  <input type="radio" name="service" value="Brand Design">
-                  <div class="option-content">
-                    <ion-icon name="color-palette-outline" class="option-icon"></ion-icon>
-                    <span class="option-text">Brand Design</span>
-                  </div>
-                  <div class="selection-glow"></div>
-                </label>
-                <label class="service-option">
-                  <input type="radio" name="service" value="Video Editing">
-                  <div class="option-content">
-                    <ion-icon name="videocam-outline" class="option-icon"></ion-icon>
-                    <span class="option-text">Video Editing</span>
-                  </div>
-                  <div class="selection-glow"></div>
-                </label>
-              </div>
-            </div>
-            <div class="form-section">
-              <label class="section-label">Your Rating</label>
-              <div class="rating-slider-container">
-                <div class="slider-wrapper">
-                  <input type="range" id="rating-slider" class="rating-slider" 
-                         min="1" max="5" step="1" value="3">
-                  <div class="slider-track">
-                    <div class="slider-fill" id="slider-fill"></div>
-                  </div>
-                  <div class="slider-thumb"></div>
-                </div>
-                <div class="rating-feedback" id="rating-feedback">
-                  Good - Glad you had a decent experience
-                </div>
-              </div>
-            </div>
-            <div class="form-section">
-              <div class="input-container">
-                <textarea id="message" name="message" maxlength="50" required></textarea>
-                <label for="message" class="floating-label">Your Message (max 50 characters)</label>
-                <div class="input-glow"></div>
-                <div class="char-count">0/50</div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="preview-side">
-        <div class="preview-content">
-          <h3 class="preview-title">Live Preview</h3>
-          <div class="live-preview-card" id="live-preview">
-            <div class="preview-header">
-              <div class="preview-avatar" id="preview-avatar">
-                <span id="preview-initials">?</span>
-              </div>
-              <div class="preview-user-info">
-                <div class="preview-name" id="preview-name">Your Name</div>
-                <div class="preview-date">Just now • <span class="verified-badge">Verified</span></div>
-              </div>
-            </div>
-            <div class="preview-message" id="preview-message">
-              Your message will appear here...
-            </div>
-            <div class="preview-footer">
-              <div class="preview-rating" id="preview-rating">
-              </div>
-              <div class="preview-service" id="preview-service">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="notification-top" id="notification">
-    <div class="notification-content">
-      <ion-icon name="checkmark-circle" class="notification-icon"></ion-icon>
-      <span class="notification-text">Review submitted successfully!</span>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="contact-container">
-    <div class="contact-left">
-      <div class="contact-title">
-        <h2>Let’s start creating<br><span class="answers">together.</span></h2>
-      </div>
-      
-      <div class="contact-form-container">
-        <form id="contact-form" class="contact-form">
-          <div class="form-row">
-            <div class="form-group">
-              <input type="text" id="firstName" name="firstName" required pattern="[A-Za-z]+" title="Only letters are allowed (no spaces)">
-              <label for="firstName">First Name</label>
-              <div class="input-checkmark"></div>
-            </div>
-            <div class="form-group">
-              <input type="text" id="lastName" name="lastName" required pattern="[A-Za-z]+" title="Only letters are allowed (no spaces)">
-              <label for="lastName">Last Name</label>
-              <div class="input-checkmark"></div>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <input type="email" id="email" name="email" required>
-            <label for="email">Email Address</label>
-            <div class="input-checkmark"></div>
-          </div>
-          
-          <div class="form-group phone-input-container">
-            <div class="phone-dropdown-wrapper">
-              <button type="button" class="phone-dropdown-trigger">
-                <div class="selected-country">
-                  <div class="country-flag">
-                    <img src="https://flagcdn.com/ro.svg" alt="Romania" class="flag-img">
-                  </div>
-                  <ion-icon name="chevron-down-outline" class="dropdown-icon"></ion-icon>
-                </div>
-              </button>
-              
-              <div class="countries-dropdown">
-                <div class="dropdown-search">
-                  <input type="text" placeholder="Search country..." class="search-input">
-                  <ion-icon name="search-outline"></ion-icon>
-                </div>
-                <div class="countries-list">
-                  </div>
-              </div>
-            </div>
-            
-            <input type="tel" id="phone" name="phone" required placeholder=" " autocomplete="tel" maxlength="20">
-            <label for="phone">Phone Number</label>
-            <div class="input-checkmark"></div>
-            <div class="phone-length-info"></div>
-          </div>
-          
-          <div class="form-group">
-            <textarea id="message" name="message" rows="3" required minlength="5"></textarea>
-            <label for="message">Your Message</label>
-            <div class="input-checkmark textarea-checkmark"></div>
-            <div class="message-length-info">
-              <span class="message-minimum">Minimum 5 characters</span>
-            </div>
-          </div>
-          
-          <button type="submit" class="submit-btn">
-            <span>Send Message</span>
-            <ion-icon name="paper-plane-outline"></ion-icon>
-          </button>
-        </form>
-      </div>
-    </div>
-    <div class="contact-right">
-      <div class="socials-section">
-        <div class="socials-header">
-          <h3>Connect with me everywhere</h3>
-          <p>— Usually responds within 24 hours —</p>
-        </div>
-        
-        <div class="socials-grid">
-          <a href="https://linkedin.com/in/lehadus-andrei-25a807372/" class="social-item" target="_blank" data-platform="linkedin">
-            <div class="social-icon">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </div>
-            <span class="social-name">LinkedIn</span>
-          </a>
-          
-          <a href="https://github.com/andzcr" class="social-item" target="_blank" data-platform="github">
-            <div class="social-icon">
-              <ion-icon name="logo-github"></ion-icon>
-            </div>
-            <span class="social-name">GitHub</span>
-          </a>
-          
-          <a href="https://discord.com/users/andz7z" class="social-item" target="_blank" data-platform="discord">
-            <div class="social-icon">
-              <ion-icon name="logo-discord"></ion-icon>
-            </div>
-            <span class="social-name">Discord</span>
-          </a>
-          
-          <a href="https://www.tiktok.com/@andz_cr" class="social-item" target="_blank" data-platform="tiktok">
-            <div class="social-icon">
-              <ion-icon name="logo-tiktok"></ion-icon>
-            </div>
-            <span class="social-name">TikTok</span>
-          </a>
-          
-          <a href="https://youtube.com/@visuals_mods" class="social-item" target="_blank" data-platform="youtube">
-            <div class="social-icon">
-              <ion-icon name="logo-youtube"></ion-icon>
-            </div>
-            <span class="social-name">YouTube</span>
-          </a>
-          
-          <a href="https://instagram.com/ndr.xc" class="social-item" target="_blank" data-platform="instagram">
-            <div class="social-icon">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </div>
-            <span class="social-name">Instagram</span>
-          </a>
-          
-          <a href="https://facebook.com/andzcr" class="social-item" target="_blank" data-platform="facebook">
-            <div class="social-icon">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </div>
-            <span class="social-name">Facebook</span>
-          </a>
-          
-          <a href="mailto:lehadus04@gmail.com" class="social-item" data-platform="gmail">
-            <div class="social-icon">
-              <ion-icon name="mail-outline"></ion-icon>
-            </div>
-            <span class="social-name">Gmail</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="main-footer">
-    <div class="footer-container">
-        <div class="footer-left">
-            <div class="footer-logo">
-                <img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="ANDZ Logo" style="height: 1em; vertical-align: middle;"> ANDZ
-            </div>
-        </div>
-
-        <div class="footer-center">
-            <div class="footer-heading">In case you've missed</div>
-            <nav class="footer-nav">
-                <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="#home" class="nav-link" data-section="home">
-                            <span class="link-text">Home</span>
-                            <span class="link-underline"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#about" class="nav-link" data-section="about">
-                            <span class="link-text">About Me</span>
-                            <span class="link-underline"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#cv-section" class="nav-link" data-section="technologies">
-                            <span class="link-text">Technologies</span>
-                            <span class="link-underline"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#projects" class="nav-link" data-section="projects">
-                            <span class="link-text">Projects</span>
-                            <span class="link-underline"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#reviews" class="nav-link" data-section="reviews">
-                            <span class="link-text">Reviews</span>
-                            <span class="link-underline"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#contact" class="nav-link" data-section="contact">
-                            <span class="link-text">Contact Me</span>
-                            <span class="link-underline"></span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
-        <div class="footer-right">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">
-                        <ion-icon name="mail-outline"></ion-icon>
-                    </div>
-                    <div class="contact-details">
-                        <div class="contact-label">Send me a message:</div>
-                        <a href="mailto:andz.contact@gmail.com" class="contact-value">andz.contact@gmail.com</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<div class="cookie-notification" id="cookie-notification">
-    <div class="cookie-content">
-        <div class="cookie-left">
-            <p class="cookie-text">
-                We use cookies — unfortunately, we’re not a pastry shop, but they are necessary to ensure the proper functioning of the website. 
-                <a href="https://www.cookiesandyou.com/" target="_blank" class="cookie-learn-more">Learn more</a>
-            </p>
-        </div>
-        
-        <div class="cookie-actions">
-            <button class="cookie-btn btn-accept" id="cookie-accept">
-                <div class="icon-container">
-                    <ion-icon name="checkmark-outline"></ion-icon>
-                </div>
-                <span class="btn-text">Accept</span>
-            </button>
-
-            <button class="cookie-btn btn-refuse" id="cookie-refuse">
-                <div class="icon-container">
-                    <ion-icon name="close-outline"></ion-icon>
-                </div>
-                <span class="btn-text">Decline</span>
-            </button>
-        </div>
-    </div>
-</div>
-</main>
-
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body class="bg-black text-white">
+    <div class="preloader">
+        <div class="loader-line"><div class="loader-fill"></div></div>
+    </div>
+
+    <div class="progress-container">
+        <div class="site-progress-bar"></div>
+    </div>
+
+    <div id="notification-container"></div>
+
+    <nav class="smart-nav fixed top-8 right-8 z-[100] flex justify-end items-center pointer-events-none">
+        <div class="nav-glass-capsule pointer-events-auto" id="nav-capsule">
+            <div class="nav-links-wrapper" id="nav-links">
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#reviews" class="nav-link">Reviews</a>
+            </div>
+            <button class="nav-cta-btn" id="nav-cta" onclick="document.querySelector('#contact').scrollIntoView({behavior: 'smooth'})">
+                <span>Get in Touch</span>
+            </button>
+        </div>
+
+        <div class="magnetic-wrap pointer-events-auto" id="burger-magnet">
+            <button class="minimal-burger-btn" id="nav-burger" onclick="toggleMenu()">
+                <div class="burger-box">
+                    <div class="mag-line line-1"></div>
+                    <div class="mag-line line-2"></div>
+                </div>
+                <div class="magnetic-area"></div>
+            </button>
+        </div>
+    </nav>
+
+    <div class="menu-overlay" id="menu-overlay">
+        <div class="menu-backdrop" onclick="toggleMenu()"></div>
+        
+        <div class="ios-interface">
+            <div class="ios-sidebar">
+                <div class="sidebar-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="ios-label">Menu</span>
+                </div>
+                <nav class="ios-nav-list">
+                    <a href="#home"
+                        class="ios-link active"
+                        data-img="ios-img-home"
+                        onclick="navigateTo('#home')">
+                        <div class="icon-box"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg></div>
+                        <span class="link-text">Home</span>
+                        <div class="active-dot"></div>
+                    </a>
+                    <a href="#services" class="ios-link" data-img="ios-img-services" onclick="toggleMenu()">
+                        <div class="icon-box"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></div>
+                        <span class="link-text">Services</span>
+                        <div class="active-dot"></div>
+                    </a>
+                    <a href="#works" class="ios-link" data-img="ios-img-works" onclick="toggleMenu()">
+                        <div class="icon-box"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+                        <span class="link-text">Works</span>
+                        <div class="active-dot"></div>
+                    </a>
+                    <a href="#reviews" class="ios-link" data-img="ios-img-reviews" onclick="toggleMenu()">
+                        <div class="icon-box"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg></div>
+                        <span class="link-text">Reviews</span>
+                        <div class="active-dot"></div>
+                    </a>
+                </nav>
+                
+                <div class="sidebar-footer">
+                    <div class="ios-profile-pill">
+                        <div class="p-avatar">
+                            <img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="A">
+                        </div>
+                        <div class="p-info">
+                            <span class="p-name">ANDZ Studio</span>
+                            <span class="p-status">Online • Galați</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ios-content-area relative">
+                <div class="content-header">
+                    <span class="ch-title">Dashboard</span>
+                    <span class="ch-date" id="ios-clock">12:00 PM</span>
+                </div>
+
+                <div class="widgets-grid">
+                    <div class="widget large-widget preview-widget">
+                        <div class="pw-image active" id="ios-img-home" style="background-image: url('https://andzcr.github.io/resources/photos/background.jpg');"></div>
+                        <div class="pw-image" id="ios-img-services" style="background-image: url('https://andzcr.github.io/resources/photos/services/webdevservice.png');"></div>
+                        <div class="pw-image" id="ios-img-works" style="background-image: url('https://andzcr.github.io/resources/projects/bass-logo.png');"></div>
+                        <div class="pw-image" id="ios-img-reviews" style="background-image: url('https://andzcr.github.io/resources/photos/reviews/good.png');"></div>
+                        <div class="pw-overlay">
+                            <span class="pw-tag">Preview</span>
+                        </div>
+                    </div>
+
+                    <a href="mailto:andz.contact@gmail.com" class="widget small-widget contact-widget">
+                        <div class="w-icon-circle">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <div class="w-content">
+                            <span class="w-label">Contact Us</span>
+                            <span class="w-value">Send Email</span>
+                        </div>
+                        <div class="w-arrow">↗</div>
+                    </a>
+
+                    <div class="widget small-widget social-widget" onclick="toggleSocials()">
+                         <div class="social-trigger-content">
+                             <div class="social-mini-stack">
+                                 <div class="mini-dot"></div>
+                                 <div class="mini-dot"></div>
+                                 <div class="mini-dot"></div>
+                             </div>
+                             <span class="social-vertical-text">SOCIALS</span>
+                         </div>
+                         <div class="social-glow-orb"></div>
+                    </div>
+                </div>
+
+                <div class="social-expanded-overlay" id="social-overlay">
+                    <div class="social-modal-header">
+                        <h3 class="social-modal-title">Network</h3>
+                        <button class="social-close-btn" onclick="toggleSocials()">
+                            <ion-icon name="close-outline"></ion-icon>
+                        </button>
+                    </div>
+                    
+                    <div class="socials-grid-full">
+                        <a href="https://linkedin.com/in/lehadus-andrei-25a807372/" class="social-card" target="_blank" data-platform="linkedin">
+                            <div class="sc-icon"><ion-icon name="logo-linkedin"></ion-icon></div>
+                            <span class="sc-name">LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/andzcr" class="social-card" target="_blank" data-platform="github">
+                            <div class="sc-icon"><ion-icon name="logo-github"></ion-icon></div>
+                            <span class="sc-name">GitHub</span>
+                        </a>
+                        <a href="https://discord.com/users/andz7z" class="social-card" target="_blank" data-platform="discord">
+                            <div class="sc-icon"><ion-icon name="logo-discord"></ion-icon></div>
+                            <span class="sc-name">Discord</span>
+                        </a>
+                        <a href="https://www.tiktok.com/@andz_cr" class="social-card" target="_blank" data-platform="tiktok">
+                            <div class="sc-icon"><ion-icon name="logo-tiktok"></ion-icon></div>
+                            <span class="sc-name">TikTok</span>
+                        </a>
+                        <a href="https://youtube.com/@visuals_mods" class="social-card" target="_blank" data-platform="youtube">
+                            <div class="sc-icon"><ion-icon name="logo-youtube"></ion-icon></div>
+                            <span class="sc-name">YouTube</span>
+                        </a>
+                        <a href="https://instagram.com/ndr.xc" class="social-card" target="_blank" data-platform="instagram">
+                            <div class="sc-icon"><ion-icon name="logo-instagram"></ion-icon></div>
+                            <span class="sc-name">Instagram</span>
+                        </a>
+                        <a href="https://facebook.com/andzcr" class="social-card" target="_blank" data-platform="facebook">
+                            <div class="sc-icon"><ion-icon name="logo-facebook"></ion-icon></div>
+                            <span class="sc-name">Facebook</span>
+                        </a>
+                        <a href="mailto:lehadus04@gmail.com" class="social-card" data-platform="gmail">
+                            <div class="sc-icon"><ion-icon name="mail-outline"></ion-icon></div>
+                            <span class="sc-name">Gmail</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="site-content" class="relative z-10 bg-black shadow-2xl">
+        <main id="main-content">
+            <section id="home" class="home-section">
+                <div class="bg-reveal-wrapper">
+                    <div class="bg-base"></div>
+                    <canvas id="reveal-canvas"></canvas>
+                </div>
+                <div class="home-content">
+                    <div class="top-left-brand">
+                        <div class="logo-3d-wrapper">
+                            <div class="logo-3d-scene">
+                                <div class="logo-3d-obj">
+                                    <div class="logo-layer l1"><img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="Logo"></div>
+                                    <div class="logo-layer l2"><img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="Logo"></div>
+                                    <div class="logo-layer l3"><img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="Logo"></div>
+                                    <div class="logo-layer l4"><img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="Logo"></div>
+                                    <div class="logo-layer l5"><img src="https://andzcr.github.io/resources/photos/andz-logo.png" alt="Logo"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="brand-text">
+                            <h1 class="brand-name">ANDZ</h1>
+                            <div class="brand-sub-rotator" id="subtitle-rotator">
+                                <div class="brand-sub-item active">Web Developer</div>
+                                <div class="brand-sub-item">Brand Designer</div>
+                                <div class="brand-sub-item">Creative Engineer</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-left-group">
+                        <p class="vision-top">WHERE YOUR BRAND</p>
+                        <h2 class="vision-main">FEELS</h2>
+                        <div class="word-rotator" id="main-rotator">
+                            <span class="rotating-word active">Powerful</span>
+                            <span class="rotating-word">Timeless</span>
+                            <span class="rotating-word">Iconic</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="manifesto-section">
+                <div class="manifesto-wrapper">
+                    <h2 class="manifesto-line">Your brand has</h2>
+                    <h2 class="manifesto-line">value I make sure</h2>
+                    <h2 class="manifesto-line">your users can</h2>
+                    <h2 class="manifesto-line" style="color: #a855f7; -webkit-text-stroke: 0;">SEE IT.</h2>
+                </div>
+            </section>
+
+            <section id="services" class="services-section">
+                <div class="services-container">
+                    <div class="services-left">
+                        <div class="sticky-wrapper">
+                            <img src="https://andzcr.github.io/resources/photos/services/webdevservice.png" class="service-img first" id="img-1" alt="Architecture">
+                            <img src="https://andzcr.github.io/resources/photos/services/brandservice.png" class="service-img" id="img-2" alt="Strategy">
+                        </div>
+                    </div>
+                    <div class="services-right">
+                        <div class="service-item first-text" data-index="0">
+                            <img src="https://andzcr.github.io/resources/photos/services/webdevservice.png" class="mobile-img" alt="Mobile 1">
+                            <span class="service-meta">01 &mdash; ENGINEERING</span>
+                            <h3 class="service-title">Web Development</h3>
+                            <p class="service-desc">Leveraging the market's latest front-end technologies and the most secure back-end techniques, we build websites from the ground up.<br><br> Consult today, <span class="underline-text">launch in 48 hours</span> - Receive a fully responsive site, custom-tailored to your specific needs.</p>
+                        </div>
+                        <div class="service-item" data-index="1">
+                            <img src="https://andzcr.github.io/resources/photos/services/brandservice.png" class="mobile-img" alt="Mobile 2">
+                            <span class="service-meta">02 &mdash; VISION</span>
+                            <h3 class="service-title">Brand Design</h3>
+                            <p class="service-desc">Whether it's a clothing brand, a fragrance line, or even nail products, we deliver brand designs that meet your <span class="underline-text">highest expectations.</span><br><br>With continuous communication throughout our collaboration, there is no room for disappointment.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="fw-section">
+                <div class="fw-track">
+                    <div class="fw-item"><h2 class="fw-big-text">CONVERT</h2><div class="fw-details"><span class="fw-num">01</span><p class="fw-desc">Built for today, flexing for what's next. A timeless approach to modern challenges.</p></div></div>
+                    <div class="fw-item"><h2 class="fw-big-text">PURPOSE</h2><div class="fw-details"><span class="fw-num">02</span><p class="fw-desc">Thoughtful, not trendy. Work grounded in purpose, not passing fads. Strategy first, pixels second.</p></div></div>
+                    <div class="fw-item"><h2 class="fw-big-text">SPEED</h2><div class="fw-details"><span class="fw-num">03</span><p class="fw-desc">A streamlined process. Quick, clean & no chaos. Efficiency in every delivery.</p></div></div>
+                </div>
+            </section>
+
+            <section id="projects" class="works-section">
+                <div class="works-gradient-mask"></div>
+                <div class="works-header-abs">
+                    <div class="title-line-wrapper"><h2 class="works-big-title work-title-anim">Selected</h2></div>
+                    <div class="title-line-wrapper"><h2 class="works-big-title outline-text work-title-anim md:pl-20">Works<span class="text-purple-500">.</span></h2></div>
+                </div>
+                <div class="works-track">
+                    <div class="work-card" data-project="bass">
+                        <img src="https://andzcr.github.io/resources/projects/bass-logo.png" class="wc-img" alt="Bass Industries">
+                        <div class="wc-overlay"><span class="wc-cat">Web Development</span><h3 class="wc-title">BASS Industries</h3></div>
+                    </div>
+                    <div class="work-card" data-project="corelle">
+                        <img src="https://andzcr.github.io/resources/projects/corelle-logo.png" class="wc-img" alt="CORELLE Cosmetics">
+                        <div class="wc-overlay"><span class="wc-cat">Brand Identity</span><h3 class="wc-title">CORELLE | Nails Brand</h3></div>
+                    </div>
+                    <div class="view-more-card">
+                        <span class="vm-label">ARCHIVE</span><h3 class="vm-text">View All<br>Projects</h3>
+                        <div class="vm-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m-7-7l7 7-7 7"/></svg></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reviews" class="reviews-section pb-20">
+                <div class="reviews-sticky-wrapper">
+                    <div class="reviews-zoom-container"><h2 class="reviews-title-zoom">Voices of the <br> Industry.</h2></div>
+                    <div class="chat-layout">
+                        <div class="chat-filter-header">
+                            <button class="chat-filter-btn active" onclick="filterChat('all', this)">All</button>
+                            <button class="chat-filter-btn" onclick="filterChat('web', this)">Web Development</button>
+                            <button class="chat-filter-btn" onclick="filterChat('brand', this)">Brand Design</button>
+                        </div>
+                        <div class="chat-column" id="reviews-container"></div>
+                    </div>
+                    <div class="cta-final-wrapper">
+                        <div class="cta-word-wrapper"><span class="cta-word" id="word-your">YOUR</span><span class="cta-word accent" id="word-turn">TURN</span></div>
+                        <div class="cta-stats-container">
+                            <div class="cta-rating-pill"><span class="cta-score" id="avg-rating-display">5.00</span><svg class="cta-star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                            <span class="cta-reviews-text">Join the list of happy clients</span>
+                        </div>
+                        <div class="cta-input-btn" onclick="openReviewModal()">
+                            <span class="cta-placeholder">Write your review...</span>
+                            <div class="cta-send-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m-7-7l7 7-7 7"/></svg></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="contact-section">
+                <div class="contact-glow"></div>
+                
+                <div class="contact-container">
+                    <div class="contact-left">
+                        <div class="contact-header">
+                            <h2>Get in Touch</h2>
+                            <p>I usually respond within 24 hours.</p>
+                        </div>
+                        
+                        <div class="contact-form-wrapper contact-form-box">
+                            <form id="main-contact-form" onsubmit="submitContactForm(event)">
+                                <div class="form-row">
+                                    <div class="input-group">
+                                        <label>Email Address</label>
+                                        <input type="email" id="contact-email" placeholder="andz@example.com" class="contact-input" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Phone Number</label>
+                                        <input type="tel" id="contact-phone" placeholder="+40 700 000 000" class="contact-input">
+                                    </div>
+                                </div>
+
+                                <div class="input-group mt-2">
+                                    <label>I'm interested in</label>
+                                    <div class="category-grid">
+                                        <label class="cat-option">
+                                            <input type="radio" name="category" value="web" checked>
+                                            <div class="cat-card">
+                                                <span>Web Development</span>
+                                            </div>
+                                        </label>
+                                        <label class="cat-option">
+                                            <input type="radio" name="category" value="brand">
+                                            <div class="cat-card">
+                                                <span>Brand Design</span>
+                                            </div>
+                                        </label>
+                                        <label class="cat-option">
+                                            <input type="radio" name="category" value="other">
+                                            <div class="cat-card">
+                                                <span>Other</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="input-group mt-2">
+                                    <label>Tell us about your project</label>
+                                    <textarea id="contact-message" placeholder="Describe your vision, goals, or current challenges..." class="contact-textarea" required></textarea>
+                                </div>
+
+                                <button type="submit" class="submit-btn">
+                                    <span>Send Message</span>
+                                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="contact-right">
+                        <div class="contact-faq-wrapper">
+                            <h3 class="faq-title">Common Questions</h3>
+                            <div class="faq-list">
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <h3>How much does a project cost?</h3>
+                                        <div class="faq-icon">
+                                            <div class="icon-line h"></div>
+                                            <div class="icon-line v"></div>
+                                        </div>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <p>Every project is unique. Pricing depends on complexity, features, and timeline. Contact me for a precise quote.</p>
+                                    </div>
+                                </div>
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <h3>What is the typical timeline?</h3>
+                                        <div class="faq-icon">
+                                            <div class="icon-line h"></div>
+                                            <div class="icon-line v"></div>
+                                        </div>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <p>For standard websites ("Consult today, launch in 48h"), we move fast. Complex custom platforms typically take 2-4 weeks. Branding projects usually take 1-2 weeks depending on feedback loops.</p>
+                                    </div>
+                                </div>
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <h3>Do you provide hosting & maintenance?</h3>
+                                        <div class="faq-icon">
+                                            <div class="icon-line h"></div>
+                                            <div class="icon-line v"></div>
+                                        </div>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <p>Yes. We offer monthly maintenance packages that include secure hosting, regular updates, backups, and 24/7 monitoring to ensure your digital presence never sleeps.</p>
+                                    </div>
+                                </div>
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <h3>Can you redesign an existing site?</h3>
+                                        <div class="faq-icon">
+                                            <div class="icon-line h"></div>
+                                            <div class="icon-line v"></div>
+                                        </div>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <p>Absolutely. We specialize in taking outdated platforms and modernizing the stack, improving speed, and refining the UX/UI.</p>
+                                    </div>
+                                </div>
+                                <div class="faq-item">
+                                    <div class="faq-question">
+                                        <h3>Do you work internationally?</h3>
+                                        <div class="faq-icon">
+                                            <div class="icon-line h"></div>
+                                            <div class="icon-line v"></div>
+                                        </div>
+                                    </div>
+                                    <div class="faq-answer">
+                                        <p>Yes, while we are based in Romania, we work with clients globally. We use tools like Discord, Slack, and Zoom to maintain seamless communication regardless of timezone.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer id="mega-footer" class="fixed bottom-0 left-0 w-full z-0 flex flex-col justify-end bg-neutral-950 overflow-hidden">
+        <div class="footer-mask absolute top-0 left-0 w-full h-40 z-20 pointer-events-none"></div>
+        <div class="container mx-auto px-6 md:px-12 relative z-10 w-full pb-8">
+            <div class="w-full flex justify-center items-center overflow-hidden py-10 md:py-20 select-none">
+                <h1 class="andz-big-text">ANDZ</h1>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs uppercase tracking-widest text-neutral-500 border-t border-white/10 pt-8">
+                <span>© 2026 ANDZ. All rights reserved ✔</span>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="https://github.com/andzcr" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
+                    <a href="https://ro.linkedin.com/in/lehadus-andrei-25a807372" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
+                    <a href="mailto:andz.contact@gmail.com" class="hover:text-white transition-colors">Email</a>
+                </div>
+                <span class="mt-4 md:mt-0">📍 Galați, RO</span>
+            </div>
+        </div>
+    </footer>
+
+    <div id="project-modal" class="project-modal">
+        <div class="modal-grain"></div>
+        <div class="modal-ambient-glow"></div>
+        <nav class="modal-nav glass-pill">
+            <button class="modal-nav-btn back-trigger"><div class="btn-icon-circle"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></div><span class="btn-text">Close</span></button>
+            <div class="modal-nav-center"><span class="project-year-badge">SELECTED WORK</span><h2 id="modal-project-title" class="project-display-name">Project Name</h2></div>
+            <button class="modal-nav-btn contact-trigger"><span class="btn-text">Contact</span><div class="btn-icon-circle filled"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div></button>
+        </nav>
+        <div class="modal-scroll-container">
+            <div id="modal-lenis-content">
+                <div class="modal-content-spacer"></div>
+                <div class="modal-main-content">
+                    <div class="modal-media-wrapper reveal-element">
+                        <div class="media-slider" id="modal-media-slider"></div>
+                        <div class="slider-controls-floating">
+                            <button class="slider-arrow prev" onclick="moveSlider(-1)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+                            <div class="slider-dots" id="slider-dots"></div>
+                            <button class="slider-arrow next" onclick="moveSlider(1)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+                        </div>
+                    </div>
+                    <div class="modal-info-grid">
+                        <div class="info-col-left reveal-element"><div class="info-block"><span class="info-label">Background Informations</span><p id="modal-project-desc" class="info-text">Description...</p></div></div>
+                        <div class="info-col-right reveal-element">
+                            <div class="glass-panel"><div class="panel-row"><span class="panel-label">Services</span><span class="panel-val">Brand Identity</span></div><div class="panel-row"><span class="panel-label">Year</span><span class="panel-val">2025</span></div><div class="panel-row"><span class="panel-label">Client</span><span class="panel-val">Fictive</span></div></div>
+                            <div class="glass-panel mt-4"><span class="panel-label block mb-3">Features</span><div class="tech-tags"><span class="tech-tag">Advanced User Registration System</span><span class="tech-tag">Interactive Review & Rating System</span><span class="tech-tag">Real-time Chat Functionality</span><span class="tech-tag">Payment Integration System</span></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer-section">
+                    <div class="footer-separator reveal-element"><span class="sep-text">Continue Exploring</span><div class="sep-line"></div></div>
+                    <div class="related-projects" id="related-projects-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="review-modal-overlay" class="glass-modal-overlay">
+        <div class="apple-modal">
+            <div class="mac-close-btn" onclick="closeReviewModal()">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </div>
+            
+            <div class="apple-glow-bg"></div>
+            
+            <div class="apple-modal-content">
+                <div class="apple-col-left">
+                    <div class="header-row">
+                        <div class="title-block">
+                            <h2 class="apple-title">Write a Review</h2>
+                            <p class="apple-subtitle">Share your experience with us.</p>
+                        </div>
+                        <button class="apple-submit-btn-top" onclick="submitReviewToFirebase(event)">
+                            <span>Publish</span>
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+
+                    <form class="apple-form-stack" onsubmit="event.preventDefault();">
+                        <div class="apple-input-group">
+                            <label>Service</label>
+                            <div class="service-select-grid">
+                                <div class="service-card active" data-val="web" onclick="selectService('web')">
+                                    <div class="sc-icon-box web"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+                                    <div class="sc-info"><span class="sc-title">Web Dev</span><span class="sc-desc">Engineering</span></div>
+                                    <div class="sc-check"></div>
+                                </div>
+                                <div class="service-card" data-val="brand" onclick="selectService('brand')">
+                                    <div class="sc-icon-box brand"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg></div>
+                                    <div class="sc-info"><span class="sc-title">Branding</span><span class="sc-desc">Design & Identity</span></div>
+                                    <div class="sc-check"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="apple-input-group">
+                            <label>Rating</label>
+                            <div class="apple-rating-grid">
+                                <div class="apple-rating-card" data-rating="1" onclick="selectRating(1)">
+                                    <img src="https://andzcr.github.io/resources/photos/reviews/poor.png" alt="Poor">
+                                    <div class="arc-check">✓</div>
+                                </div>
+                                <div class="apple-rating-card" data-rating="3" onclick="selectRating(3)">
+                                    <img src="https://andzcr.github.io/resources/photos/reviews/meh.png" alt="Good">
+                                    <div class="arc-check">✓</div>
+                                </div>
+                                <div class="apple-rating-card active" data-rating="5" onclick="selectRating(5)">
+                                    <img src="https://andzcr.github.io/resources/photos/reviews/good.png" alt="Excellent">
+                                    <div class="arc-check">✓</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="apple-input-group">
+                            <label>Name</label>
+                            <input type="text" id="rev-name" class="apple-input" placeholder="Your Name" oninput="updatePreview()">
+                        </div>
+                        
+                        <div class="apple-input-group">
+                            <label>Review</label>
+                            <div class="textarea-wrapper">
+                                <textarea id="rev-desc" class="apple-textarea" placeholder="How was it?" oninput="updatePreview()"></textarea>
+                                <span class="apple-counter" id="char-counter">0/100</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="apple-col-right">
+                    <span class="preview-label">LIVE PREVIEW</span>
+                    <div class="preview-card-glass">
+                        <div class="pc-blur-layer"></div>
+                        <div class="pc-header">
+                            <div class="pc-avatar"><img id="pc-img" src="https://andzcr.github.io/resources/photos/reviews/good.png" alt="Avatar"></div>
+                            <div class="pc-meta">
+                                <h3 id="pc-name">Andrei</h3>
+                                <div id="pc-service" class="pc-badge">Web Development</div>
+                            </div>
+                        </div>
+                        <p id="pc-body" class="pc-body">"Your review will appear here..."</p>
+                        <div class="pc-footer">
+                            <div id="pc-icon-box" class="pc-icon-box"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+                            <span id="pc-stars" class="pc-stars">★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
-    <script src="js/about.js"></script>
-    <script src="js/contact.js"></script>
-    <script src="js/cv.js"></script>
     <script src="js/home.js"></script>
-    <script src="js/reviews.js"></script>
+    <script src="js/services.js"></script>
     <script src="js/projects.js"></script>
-    <script src="js/footer.js"></script>
-    <script src="js/switch.js"></script>
+    <script src="js/reviews.js"></script>
+    <script src="js/standout.js"></script>
+    <script src="js/contact.js"></script>
 </body>
 </html>

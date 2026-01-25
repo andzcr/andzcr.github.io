@@ -1,7 +1,3 @@
-/* =================================================================
-   MAIN SYSTEM: CLEAN & STABLE
-   ================================================================= */
-
 const firebaseConfig = {
     apiKey: "AIzaSyC0DShqS1R3eqCIVFLKXxU0vmi0mUqprek",
     authDomain: "portfolio-65392.firebaseapp.com",
@@ -14,167 +10,232 @@ const firebaseConfig = {
 if (typeof firebase !== 'undefined' && !firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
     window.db = firebase.firestore();
+    console.log("Firebase Connected Successfully ✅");
+} else {
+    console.warn("Firebase SDK not loaded or already initialized.");
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    'use strict';
-
-    const loadIcons = () => {
-        if (document.querySelector('script[src*="ionicons"]')) return;
-        const s = document.createElement('script'); s.type = 'module';
-        s.src = 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js';
-        document.head.appendChild(s);
-        const nm = document.createElement('script'); nm.nomodule = true;
-        nm.src = 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js';
-        document.head.appendChild(nm);
-    };
-    loadIcons();
-
-    const initMasterExperience = () => {
-        const navbar = document.getElementById('ios-navbar');
-        const progressBar = document.getElementById('nav-progress-bar');
-        const navItems = document.querySelectorAll('.ios-nav-item');
-        const sections = document.querySelectorAll('section');
-
-        let lastScrollTop = 0;
-        let isScrolledMode = false;
-
-        const lenis = new Lenis({
-            duration: 1.5,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            smooth: true,
-            smoothTouch: false,
-            touchMultiplier: 2,
-        });
-
-        if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
-            lenis.on('scroll', ScrollTrigger.update);
-            gsap.ticker.add((time) => lenis.raf(time * 1000));
-            gsap.ticker.lagSmoothing(0);
-        } else {
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
-            }
-            requestAnimationFrame(raf);
-        }
-
-        lenis.on('scroll', (e) => {
-            const scrollTop = e.scroll;
-            const delta = scrollTop - lastScrollTop;
-            
-            if (scrollTop > 60 && delta > 0) {
-                if (!isScrolledMode) {
-                    isScrolledMode = true;
-                    navbar.classList.add('scrolled-mode');
-                }
-            } 
-            else if ((delta < -5) || scrollTop <= 60) {
-                if (isScrolledMode) {
-                    isScrolledMode = false;
-                    navbar.classList.remove('scrolled-mode');
-                }
-            }
-
-            lastScrollTop = scrollTop;
-
-            if (isScrolledMode) {
-                const height = document.documentElement.scrollHeight - window.innerHeight;
-                const progress = (scrollTop / height) * 100;
-                progressBar.style.width = `${progress}%`;
-            } else {
-                progressBar.style.width = '0%';
-            }
-        });
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '-50% 0px -50% 0px',
-            threshold: 0
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navItems.forEach(item => item.classList.remove('active'));
-                    const id = entry.target.getAttribute('id');
-                    if(id) {
-                        const link = document.querySelector(`.ios-link[data-section="${id}"]`);
-                        if(link) {
-                            link.parentElement.classList.add('active');
-                        }
-                    }
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => observer.observe(section));
-
-        document.querySelectorAll('.ios-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    lenis.scrollTo(targetElement, {
-                        offset: 0,
-                        duration: 2,
-                    });
-                }
-            });
-        });
-    };
-
-    initMasterExperience();
+window.showNotification = function(message) {
+    const container = document.getElementById('notification-container');
     
-    const initCookieConsent = () => {
-        const cw = document.getElementById('cookie-notification');
-        const ab = document.getElementById('cookie-accept');
-        const rb = document.getElementById('cookie-refuse');
-        if (!cw || !ab || !rb) return;
-        if (localStorage.getItem('cookieConsent') === 'true') return;
-        setTimeout(() => { cw.classList.add('show'); }, 1500);
-        ab.addEventListener('click', () => {
-            localStorage.setItem('cookieConsent', 'true');
-            cw.classList.remove('show'); cw.classList.add('hide-out');
-            setTimeout(() => { cw.style.display = 'none'; }, 800);
-        });
-        rb.addEventListener('click', () => {
-            localStorage.removeItem('cookieConsent');
-            cw.classList.remove('show'); cw.classList.add('hide-out');
-        });
-    };
-    initCookieConsent();
+    const notif = document.createElement('div');
+    notif.className = 'ios-notification';
+    notif.innerHTML = `
+        <div class="notif-icon-check">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="notif-content">
+            <span class="notif-title">Success</span>
+            <span class="notif-msg">${message}</span>
+        </div>
+        <div class="notif-glow"></div>
+    `;
 
-    if (typeof window.initFooter === 'function') window.initFooter();
-});
+    container.appendChild(notif);
 
-document.addEventListener('DOMContentLoaded', function() {
-    const mesaje = [ "‎ ‎ANDZ.ro | Studio", "‎ ‎ ‎ ‎MADE TO PERFORM", "‎ ‎ANDZ.ro | Studio", "‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎BRAND DESIGN" ];
-    const spatiereCentrare = "          "; 
-    let mesajIndex = 0, charIndex = 0, seSterge = false;
-    function esteMobil() { return (window.innerWidth < 768) || /Android|webOS|iPhone/i.test(navigator.userAgent); }
-    function animatieTitlu() {
-        const mesajCurent = mesaje[mesajIndex];
-        if (seSterge) charIndex = Math.max(0, charIndex - 1);
-        else charIndex = Math.min(mesajCurent.length, charIndex + 1);
-        const textPartial = mesajCurent.substring(0, charIndex);
-        document.title = textPartial.length === 0 ? "\u200E" : spatiereCentrare + textPartial;
-        let timp = 200;
-        if (!seSterge && charIndex === mesajCurent.length) { timp = 2000; seSterge = true; }
-        else if (seSterge && charIndex === 0) { seSterge = false; mesajIndex = (mesajIndex + 1) % mesaje.length; timp = 400; }
-        else if (seSterge) timp = 100;
-        setTimeout(animatieTitlu, timp);
+    gsap.fromTo(notif, 
+        { x: 50, opacity: 0, scale: 0.9 },
+        { x: 0, opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.2)" }
+    );
+
+    setTimeout(() => {
+        gsap.to(notif, {
+            x: 50, opacity: 0, duration: 0.3, onComplete: () => notif.remove()
+        });
+    }, 4000);
+};
+
+function adjustFooterSpacing() {
+    const footer = document.getElementById('mega-footer');
+    const content = document.getElementById('site-content');
+    
+    if (footer && content) {
+        const footerHeight = footer.offsetHeight;
+        content.style.marginBottom = `${footerHeight}px`;
     }
-    if (esteMobil()) document.title = mesaje[0]; else animatieTitlu();
+}
+
+const lenis = new Lenis({ 
+    duration: 1.2, 
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+    smooth: true 
 });
 
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'F12') e.preventDefault();
-    if (e.ctrlKey && e.shiftKey && e.key === 'I') e.preventDefault();
-    if (e.ctrlKey && e.shiftKey && e.key === 'J') e.preventDefault();
-    if (e.ctrlKey && e.key === 'u') e.preventDefault();
-    if (e.ctrlKey && e.key === 's') e.preventDefault();
+lenis.on('scroll', ScrollTrigger.update);
+
+lenis.on('scroll', (e) => {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (e.animatedScroll / totalHeight) * 100;
+    
+    gsap.set('.site-progress-bar', { width: progress + '%' });
 });
+
+gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
+
+gsap.registerPlugin(ScrollTrigger);
+
+window.addEventListener('load', () => {
+    adjustFooterSpacing();
+
+    const tl = gsap.timeline();
+    tl.to('.loader-fill', { width: '100%', duration: 1, ease: 'power2.inOut' })
+      .to('.preloader', { y: '-100%', duration: 0.8, ease: 'expo.inOut', delay: 0.1 })
+      .to('.hero-anim', { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: 'power3.out' }, "-=0.4");
+
+    const projectCards = document.querySelectorAll('.work-card');
+    const viewMoreBtn = document.querySelector('.view-more-card');
+    if (projectCards.length <= 2) {
+        if (viewMoreBtn) viewMoreBtn.style.display = 'none';
+    }
+});
+
+window.addEventListener('resize', adjustFooterSpacing);
+
+const manifestoLines = document.querySelectorAll('.manifesto-line');
+manifestoLines.forEach(line => {
+    gsap.to(line, {
+        backgroundPosition: "0% 0", 
+        ease: "none",
+        scrollTrigger: {
+            trigger: line,
+            start: "top 80%",
+            end: "bottom 40%",
+            scrub: 1
+        }
+    });
+});
+
+const videoCards = document.querySelectorAll('.work-card');
+videoCards.forEach(card => {
+    const video = card.querySelector('video');
+    if(video) {
+        card.addEventListener('mouseenter', () => video.play());
+        card.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0;
+        });
+    }
+});
+
+const cookieSystem = {
+    storageKey: 'edg_cookies_accepted',
+    overlay: null,
+    card: null,
+
+    init() {
+        this.createMarkup();
+
+        this.overlay = document.getElementById('cookie-overlay');
+        this.card = document.getElementById('cookie-card');
+
+        if (!localStorage.getItem(this.storageKey)) {
+            setTimeout(() => this.show(), 1000);
+        }
+    },
+
+    createMarkup() {
+        const markup = `
+            <div id="cookie-overlay">
+                <div id="cookie-card">
+                    <div class="cookie-image-container">
+                        <img src="https://andzcr.github.io/resources/photos/cookies.png" alt="Cookies">
+                    </div>
+                    <div class="cookie-content">
+                        <h2 class="cookie-title">Unfortunately, I don't own a bakery 🍪</h2>
+                        <p class="cookie-description">
+                            But we do use cookies to provide you with the smoothest digital experience possible. These help us analyze traffic, remember your preferences, and ensure our design "gravitates" correctly around your needs. By continuing to browse, you agree to our data policy.
+                        </p>
+                        <div class="cookie-actions">
+                            <button class="cookie-btn btn-more" onclick="window.open('https://www.cookiesandyou.com/', '_blank')">Find More</button>
+                            <button class="cookie-btn btn-accept" id="cookie-accept-btn">Accept</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', markup);
+
+        document.getElementById('cookie-accept-btn').addEventListener('click', () => this.accept());
+    },
+
+    show() {
+        document.body.classList.add('no-scroll');
+        
+        if (window.lenis) window.lenis.stop();
+        if (typeof lenis !== 'undefined' && lenis.stop) lenis.stop();
+
+        this.overlay.style.display = 'flex';
+
+        const tl = gsap.timeline();
+        
+        tl.to(this.overlay, {
+            backdropFilter: "blur(15px)",
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+            duration: 1.2,
+            ease: "power2.out"
+        });
+
+        tl.to(this.card, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "elastic.out(1, 0.8)"
+        }, "-=0.8");
+    },
+
+    accept() {
+        localStorage.setItem(this.storageKey, 'true');
+
+        const tl = gsap.timeline({
+            onComplete: () => {
+                this.overlay.style.display = 'none';
+                document.body.classList.remove('no-scroll');
+                
+                if (window.lenis) window.lenis.start();
+                if (typeof lenis !== 'undefined' && lenis.start) lenis.start();
+            }
+        });
+
+        tl.to(this.card, {
+            opacity: 0,
+            y: 100,
+            scale: 0.9,
+            duration: 0.6,
+            ease: "power2.in"
+        });
+
+        tl.to(this.overlay, {
+            backdropFilter: "blur(0px)",
+            backgroundColor: "rgba(0, 0, 0, 0)",
+            duration: 0.5
+        }, "-=0.3");
+    }
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+    cookieSystem.init();
+});
+
+function navigateTo(selector) {
+  const target = document.querySelector(selector);
+  if (!target) return;
+
+  toggleMenu();
+
+  setTimeout(() => {
+    if (window.lenis) {
+      window.lenis.scrollTo(target, {
+        offset: -80,
+        duration: 1.2,
+        easing: (t) => 1 - Math.pow(1 - t, 4)
+      });
+    } else {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, 350);
+}
