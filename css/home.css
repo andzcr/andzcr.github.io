@@ -1006,8 +1006,8 @@ body {
     .mag-line { background: #fff !important; }
 
     .top-left-brand { top: 30px; left: 20px; gap: 6px; }
-    .logo-3d-wrapper { width: 36px; height: 36px; }
-    .brand-name { font-size: 1.1rem; }
+    .logo-3d-wrapper { position: relative; top: 15px; width: 50px; height: 50px; transform: scale(1.7);}
+    .brand-name { font-size: 1.1rem; display: none; }
     .bottom-left-group { bottom: 30px; left: 20px; gap: 0; }
     .vision-main { font-size: 2.5rem; }
     .word-rotator { font-size: 2.2rem; }
@@ -1054,28 +1054,28 @@ body {
     }
     
     .vision-top {
-        font-size: 1.5rem !important;
+        font-size: 0.9rem !important;
         letter-spacing: 2px !important;
-        top: 150px !important;
-        left: -150px;
+        top: 50px !important;
+        left: -65px;
         color: rgba(255, 255, 255, 0.9) !important;
         text-shadow: 0 8px 14px rgb(0, 0, 0) !important;
     }
     
     .vision-main {
-        font-size: 6rem !important;
+        font-size: 4rem !important;
         line-height: 1.1 !important;
         color: white !important;
-        left: -150px;
-        top: 130px;
+        left: -60px;
+        top: 30px;
         text-shadow: 0 0px 30px rgb(0, 0, 0) !important;
         margin-bottom: 5px !important;
     }
     
     .word-rotator {
-        font-size: 6rem !important;
+        font-size: 5rem !important;
         height: 1.3em !important;
-        left: 150px !important;
+        left: 50px !important;
         margin: 0 auto !important;
         justify-content: center !important;
         place-items: center !important;
@@ -1102,7 +1102,7 @@ body {
     }
     
     .brand-sub-item {
-        color: rgba(0, 0, 0, 0.9) !important;
+        display: none;
     }
     
     #reveal-canvas {
