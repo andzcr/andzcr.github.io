@@ -146,7 +146,7 @@ const cookieSystem = {
                         <img src="https://andzcr.github.io/resources/photos/cookies.png" alt="Cookies">
                     </div>
                     <div class="cookie-content">
-                        <h2 class="cookie-title">Unfortunately, I don't own a bakery</h2>
+                        <h2 class="cookie-title">Unfortunately, I don't own a bakery 🍪</h2>
                         <p class="cookie-description">
                             But we do use cookies to provide you with the smoothest digital experience possible. These help us analyze traffic, remember your preferences, and ensure our design "gravitates" correctly around your needs. By continuing to browse, you agree to our data policy.
                         </p>
@@ -238,5 +238,4 @@ function navigateTo(selector) {
       target.scrollIntoView({ behavior: 'smooth' });
     }
   }, 350);
-
 }

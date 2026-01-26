@@ -1,11 +1,3 @@
-:root {
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-blur: 40px;
-    --accent-purple: #a855f7;
-    --input-bg: rgba(20, 20, 20, 0.6);
-}
-
 #contact {
     position: relative;
     width: 100%;
